@@ -1,0 +1,537 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A500B40F1E8D556B0025EBC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500B40E1E8D556B0025EBC9 /* AppDelegate.swift */; };
+		A500B4111E8D556B0025EBC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500B4101E8D556B0025EBC9 /* ViewController.swift */; };
+		A500B4141E8D556B0025EBC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A500B4121E8D556B0025EBC9 /* Main.storyboard */; };
+		A500B4161E8D556B0025EBC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A500B4151E8D556B0025EBC9 /* Assets.xcassets */; };
+		A500B4191E8D556B0025EBC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A500B4171E8D556B0025EBC9 /* LaunchScreen.storyboard */; };
+		A500B4241E8D556B0025EBC9 /* MatteLekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500B4231E8D556B0025EBC9 /* MatteLekTests.swift */; };
+		A500B42F1E8D556B0025EBC9 /* MatteLekUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500B42E1E8D556B0025EBC9 /* MatteLekUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A500B4201E8D556B0025EBC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A500B4031E8D556B0025EBC9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A500B40A1E8D556B0025EBC9;
+			remoteInfo = MatteLek;
+		};
+		A500B42B1E8D556B0025EBC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A500B4031E8D556B0025EBC9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A500B40A1E8D556B0025EBC9;
+			remoteInfo = MatteLek;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A500B40B1E8D556B0025EBC9 /* MatteLek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatteLek.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A500B40E1E8D556B0025EBC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A500B4101E8D556B0025EBC9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A500B4131E8D556B0025EBC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A500B4151E8D556B0025EBC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A500B4181E8D556B0025EBC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A500B41A1E8D556B0025EBC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A500B41F1E8D556B0025EBC9 /* MatteLekTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatteLekTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A500B4231E8D556B0025EBC9 /* MatteLekTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatteLekTests.swift; sourceTree = "<group>"; };
+		A500B4251E8D556B0025EBC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A500B42A1E8D556B0025EBC9 /* MatteLekUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatteLekUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A500B42E1E8D556B0025EBC9 /* MatteLekUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatteLekUITests.swift; sourceTree = "<group>"; };
+		A500B4301E8D556B0025EBC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A500B4081E8D556B0025EBC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A500B41C1E8D556B0025EBC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A500B4271E8D556B0025EBC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A500B4021E8D556B0025EBC9 = {
+			isa = PBXGroup;
+			children = (
+				A500B40D1E8D556B0025EBC9 /* MatteLek */,
+				A500B4221E8D556B0025EBC9 /* MatteLekTests */,
+				A500B42D1E8D556B0025EBC9 /* MatteLekUITests */,
+				A500B40C1E8D556B0025EBC9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A500B40C1E8D556B0025EBC9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A500B40B1E8D556B0025EBC9 /* MatteLek.app */,
+				A500B41F1E8D556B0025EBC9 /* MatteLekTests.xctest */,
+				A500B42A1E8D556B0025EBC9 /* MatteLekUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A500B40D1E8D556B0025EBC9 /* MatteLek */ = {
+			isa = PBXGroup;
+			children = (
+				A500B40E1E8D556B0025EBC9 /* AppDelegate.swift */,
+				A500B4101E8D556B0025EBC9 /* ViewController.swift */,
+				A500B4121E8D556B0025EBC9 /* Main.storyboard */,
+				A500B4151E8D556B0025EBC9 /* Assets.xcassets */,
+				A500B4171E8D556B0025EBC9 /* LaunchScreen.storyboard */,
+				A500B41A1E8D556B0025EBC9 /* Info.plist */,
+			);
+			path = MatteLek;
+			sourceTree = "<group>";
+		};
+		A500B4221E8D556B0025EBC9 /* MatteLekTests */ = {
+			isa = PBXGroup;
+			children = (
+				A500B4231E8D556B0025EBC9 /* MatteLekTests.swift */,
+				A500B4251E8D556B0025EBC9 /* Info.plist */,
+			);
+			path = MatteLekTests;
+			sourceTree = "<group>";
+		};
+		A500B42D1E8D556B0025EBC9 /* MatteLekUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A500B42E1E8D556B0025EBC9 /* MatteLekUITests.swift */,
+				A500B4301E8D556B0025EBC9 /* Info.plist */,
+			);
+			path = MatteLekUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A500B40A1E8D556B0025EBC9 /* MatteLek */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A500B4331E8D556B0025EBC9 /* Build configuration list for PBXNativeTarget "MatteLek" */;
+			buildPhases = (
+				A500B4071E8D556B0025EBC9 /* Sources */,
+				A500B4081E8D556B0025EBC9 /* Frameworks */,
+				A500B4091E8D556B0025EBC9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MatteLek;
+			productName = MatteLek;
+			productReference = A500B40B1E8D556B0025EBC9 /* MatteLek.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A500B41E1E8D556B0025EBC9 /* MatteLekTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A500B4361E8D556B0025EBC9 /* Build configuration list for PBXNativeTarget "MatteLekTests" */;
+			buildPhases = (
+				A500B41B1E8D556B0025EBC9 /* Sources */,
+				A500B41C1E8D556B0025EBC9 /* Frameworks */,
+				A500B41D1E8D556B0025EBC9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A500B4211E8D556B0025EBC9 /* PBXTargetDependency */,
+			);
+			name = MatteLekTests;
+			productName = MatteLekTests;
+			productReference = A500B41F1E8D556B0025EBC9 /* MatteLekTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A500B4291E8D556B0025EBC9 /* MatteLekUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A500B4391E8D556B0025EBC9 /* Build configuration list for PBXNativeTarget "MatteLekUITests" */;
+			buildPhases = (
+				A500B4261E8D556B0025EBC9 /* Sources */,
+				A500B4271E8D556B0025EBC9 /* Frameworks */,
+				A500B4281E8D556B0025EBC9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A500B42C1E8D556B0025EBC9 /* PBXTargetDependency */,
+			);
+			name = MatteLekUITests;
+			productName = MatteLekUITests;
+			productReference = A500B42A1E8D556B0025EBC9 /* MatteLekUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A500B4031E8D556B0025EBC9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "TIMMY KONNEUS";
+				TargetAttributes = {
+					A500B40A1E8D556B0025EBC9 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = AK75Q9ZPYM;
+						ProvisioningStyle = Automatic;
+					};
+					A500B41E1E8D556B0025EBC9 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = AK75Q9ZPYM;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A500B40A1E8D556B0025EBC9;
+					};
+					A500B4291E8D556B0025EBC9 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = AK75Q9ZPYM;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A500B40A1E8D556B0025EBC9;
+					};
+				};
+			};
+			buildConfigurationList = A500B4061E8D556B0025EBC9 /* Build configuration list for PBXProject "MatteLek" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A500B4021E8D556B0025EBC9;
+			productRefGroup = A500B40C1E8D556B0025EBC9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A500B40A1E8D556B0025EBC9 /* MatteLek */,
+				A500B41E1E8D556B0025EBC9 /* MatteLekTests */,
+				A500B4291E8D556B0025EBC9 /* MatteLekUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A500B4091E8D556B0025EBC9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A500B4191E8D556B0025EBC9 /* LaunchScreen.storyboard in Resources */,
+				A500B4161E8D556B0025EBC9 /* Assets.xcassets in Resources */,
+				A500B4141E8D556B0025EBC9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A500B41D1E8D556B0025EBC9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A500B4281E8D556B0025EBC9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A500B4071E8D556B0025EBC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A500B4111E8D556B0025EBC9 /* ViewController.swift in Sources */,
+				A500B40F1E8D556B0025EBC9 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A500B41B1E8D556B0025EBC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A500B4241E8D556B0025EBC9 /* MatteLekTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A500B4261E8D556B0025EBC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A500B42F1E8D556B0025EBC9 /* MatteLekUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A500B4211E8D556B0025EBC9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A500B40A1E8D556B0025EBC9 /* MatteLek */;
+			targetProxy = A500B4201E8D556B0025EBC9 /* PBXContainerItemProxy */;
+		};
+		A500B42C1E8D556B0025EBC9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A500B40A1E8D556B0025EBC9 /* MatteLek */;
+			targetProxy = A500B42B1E8D556B0025EBC9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A500B4121E8D556B0025EBC9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A500B4131E8D556B0025EBC9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A500B4171E8D556B0025EBC9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A500B4181E8D556B0025EBC9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A500B4311E8D556B0025EBC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A500B4321E8D556B0025EBC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A500B4341E8D556B0025EBC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = AK75Q9ZPYM;
+				INFOPLIST_FILE = MatteLek/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nix.MatteLek;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		A500B4351E8D556B0025EBC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = AK75Q9ZPYM;
+				INFOPLIST_FILE = MatteLek/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nix.MatteLek;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		A500B4371E8D556B0025EBC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = AK75Q9ZPYM;
+				INFOPLIST_FILE = MatteLekTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nix.MatteLekTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MatteLek.app/MatteLek";
+			};
+			name = Debug;
+		};
+		A500B4381E8D556B0025EBC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = AK75Q9ZPYM;
+				INFOPLIST_FILE = MatteLekTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nix.MatteLekTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MatteLek.app/MatteLek";
+			};
+			name = Release;
+		};
+		A500B43A1E8D556B0025EBC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = AK75Q9ZPYM;
+				INFOPLIST_FILE = MatteLekUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nix.MatteLekUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = MatteLek;
+			};
+			name = Debug;
+		};
+		A500B43B1E8D556B0025EBC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = AK75Q9ZPYM;
+				INFOPLIST_FILE = MatteLekUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nix.MatteLekUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = MatteLek;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A500B4061E8D556B0025EBC9 /* Build configuration list for PBXProject "MatteLek" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A500B4311E8D556B0025EBC9 /* Debug */,
+				A500B4321E8D556B0025EBC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A500B4331E8D556B0025EBC9 /* Build configuration list for PBXNativeTarget "MatteLek" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A500B4341E8D556B0025EBC9 /* Debug */,
+				A500B4351E8D556B0025EBC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A500B4361E8D556B0025EBC9 /* Build configuration list for PBXNativeTarget "MatteLekTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A500B4371E8D556B0025EBC9 /* Debug */,
+				A500B4381E8D556B0025EBC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A500B4391E8D556B0025EBC9 /* Build configuration list for PBXNativeTarget "MatteLekUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A500B43A1E8D556B0025EBC9 /* Debug */,
+				A500B43B1E8D556B0025EBC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A500B4031E8D556B0025EBC9 /* Project object */;
+}

@@ -132,6 +132,11 @@ class LoginViewController: UIViewController {
        
             let usersReference = ref.child("users").child(uid)
             let values = ["email": email]
+            
+        
+            ref.child("users").child(uid).updateChildValues(["highscore": 0])
+            ref.child("users").child(uid).updateChildValues(["neghighscore": 0])
+            
             usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
                 if err != nil{
                     print(err)

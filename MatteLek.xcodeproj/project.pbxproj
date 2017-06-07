@@ -15,9 +15,11 @@
 		A500B4191E8D556B0025EBC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A500B4171E8D556B0025EBC9 /* LaunchScreen.storyboard */; };
 		A500B4241E8D556B0025EBC9 /* MatteLekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500B4231E8D556B0025EBC9 /* MatteLekTests.swift */; };
 		A500B42F1E8D556B0025EBC9 /* MatteLekUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500B42E1E8D556B0025EBC9 /* MatteLekUITests.swift */; };
+		A51E66D01EE42CBF006B74D7 /* ScoreboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E66CF1EE42CBF006B74D7 /* ScoreboardTableViewController.swift */; };
+		A51E66D61EE4597D006B74D7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E66D51EE4597D006B74D7 /* User.swift */; };
+		A51E66D81EE4743E006B74D7 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E66D71EE4743E006B74D7 /* UserTableViewCell.swift */; };
 		A55EA1511EA167900003C76A /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EA1501EA167900003C76A /* SettingCell.swift */; };
 		A55EA1531EA18EEA0003C76A /* GameSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EA1521EA18EEA0003C76A /* GameSettingsViewController.swift */; };
-		A55EA1551EA196F00003C76A /* ScoreBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EA1541EA196F00003C76A /* ScoreBoardViewController.swift */; };
 		A55EA1571EA197450003C76A /* ChangeDifficultyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EA1561EA197450003C76A /* ChangeDifficultyViewController.swift */; };
 		A55EA15A1EA29EFD0003C76A /* BounceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EA1591EA29EFD0003C76A /* BounceButton.swift */; };
 		A55EA15E1EA392600003C76A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EA15D1EA392600003C76A /* LoginViewController.swift */; };
@@ -59,9 +61,11 @@
 		A500B42A1E8D556B0025EBC9 /* MatteLekUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatteLekUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A500B42E1E8D556B0025EBC9 /* MatteLekUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatteLekUITests.swift; sourceTree = "<group>"; };
 		A500B4301E8D556B0025EBC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A51E66CF1EE42CBF006B74D7 /* ScoreboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardTableViewController.swift; sourceTree = "<group>"; };
+		A51E66D51EE4597D006B74D7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A51E66D71EE4743E006B74D7 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		A55EA1501EA167900003C76A /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		A55EA1521EA18EEA0003C76A /* GameSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSettingsViewController.swift; sourceTree = "<group>"; };
-		A55EA1541EA196F00003C76A /* ScoreBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreBoardViewController.swift; sourceTree = "<group>"; };
 		A55EA1561EA197450003C76A /* ChangeDifficultyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeDifficultyViewController.swift; sourceTree = "<group>"; };
 		A55EA1591EA29EFD0003C76A /* BounceButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceButton.swift; sourceTree = "<group>"; };
 		A55EA15D1EA392600003C76A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -145,8 +149,10 @@
 				A55EA14F1EA1677E0003C76A /* View */,
 				A58805101EA15CC900533BB5 /* Controller */,
 				A500B40E1E8D556B0025EBC9 /* AppDelegate.swift */,
+				A51E66D51EE4597D006B74D7 /* User.swift */,
 				A500B4101E8D556B0025EBC9 /* ViewController.swift */,
 				A500B4121E8D556B0025EBC9 /* Main.storyboard */,
+				A51E66D71EE4743E006B74D7 /* UserTableViewCell.swift */,
 				A55EA1621EA803D00003C76A /* ScoreboardView.swift */,
 				A500B4151E8D556B0025EBC9 /* Assets.xcassets */,
 				A500B4171E8D556B0025EBC9 /* LaunchScreen.storyboard */,
@@ -197,7 +203,7 @@
 				A58805111EA15CE200533BB5 /* SettingsLauncher.swift */,
 				A55EA1561EA197450003C76A /* ChangeDifficultyViewController.swift */,
 				A55EA1521EA18EEA0003C76A /* GameSettingsViewController.swift */,
-				A55EA1541EA196F00003C76A /* ScoreBoardViewController.swift */,
+				A51E66CF1EE42CBF006B74D7 /* ScoreboardTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -400,14 +406,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A55EA15E1EA392600003C76A /* LoginViewController.swift in Sources */,
+				A51E66D01EE42CBF006B74D7 /* ScoreboardTableViewController.swift in Sources */,
 				A500B4111E8D556B0025EBC9 /* ViewController.swift in Sources */,
 				A55EA1531EA18EEA0003C76A /* GameSettingsViewController.swift in Sources */,
+				A51E66D81EE4743E006B74D7 /* UserTableViewCell.swift in Sources */,
 				A55EA1571EA197450003C76A /* ChangeDifficultyViewController.swift in Sources */,
 				A55EA1631EA803D00003C76A /* ScoreboardView.swift in Sources */,
 				A58805121EA15CE200533BB5 /* SettingsLauncher.swift in Sources */,
 				A55EA1511EA167900003C76A /* SettingCell.swift in Sources */,
+				A51E66D61EE4597D006B74D7 /* User.swift in Sources */,
 				A55EA15A1EA29EFD0003C76A /* BounceButton.swift in Sources */,
-				A55EA1551EA196F00003C76A /* ScoreBoardViewController.swift in Sources */,
 				A500B40F1E8D556B0025EBC9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

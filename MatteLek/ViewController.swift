@@ -33,6 +33,31 @@ class ViewController: UIViewController {
     @IBOutlet weak var liv1: UIImageView!
     @IBOutlet weak var pointslabel: UIImageView!
     
+    @IBAction func Numbers(_ sender: UIButton) {
+        
+        SvarInput.text = SvarInput.text! + String(sender.tag-1)
+    }
+    
+    @IBAction func clearInput(_ sender: AnyObject) {
+        
+        SvarInput.text = ""
+    }
+    
+   
+    @IBAction func MakeInputNegative(_ sender: AnyObject) {
+        var minus = "-"
+     
+        if SvarInput.text?.hasPrefix(minus) == false {
+        var minus = "-"
+        SvarInput.text = String(minus + SvarInput.text!)
+            
+        } else if Int(SvarInput.text!)! < 0 {
+            
+     SvarInput.text?.remove(at: (SvarInput.text?.startIndex)!)
+            
+        }
+
+    }
     var Poäng = Int()
     var Försök = Int(3)
     var RättSvar = Int()
@@ -45,11 +70,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var RättEllerFelMSG: UILabel!
    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
         self.navigationController?.isNavigationBarHidden = false
         RättaKnapp.setTitle("Starta", for: .normal)
        
@@ -63,9 +86,6 @@ class ViewController: UIViewController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
 
-        
-      
-        
         FörsökRäknare.isHidden = true
         QlueLabel.isHidden = true
         
@@ -75,13 +95,11 @@ class ViewController: UIViewController {
         
         RättaKnapp.layer.cornerRadius = 12
       
-        
         if RättaKnapp.titleLabel?.text == "Starta" {
 
             SvarInput.isUserInteractionEnabled = false
             
         }
-      
     }
     
     func checkIfUserIsLoggedIn() {
@@ -91,7 +109,8 @@ class ViewController: UIViewController {
             
         } else{
             let uid = FIRAuth.auth()?.currentUser?.uid
-            FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+      FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String : AnyObject] {
                     self.navigationItem.title = dictionary["email"] as? String
@@ -101,13 +120,11 @@ class ViewController: UIViewController {
                 
             })
         }
-      
-        
     }
     
     func handleLogout(){
         
-        do {
+    do {
             try FIRAuth.auth()?.signOut()
         } catch let logoutError {
             print(logoutError)
@@ -115,15 +132,7 @@ class ViewController: UIViewController {
     
          self.navigationController?.isNavigationBarHidden = true
        performSegue(withIdentifier: "BackToLogin", sender: navigationItem.leftBarButtonItem)
-        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-        
-        }
-    
     
     func SkapaTal() {
         
@@ -139,6 +148,8 @@ class ViewController: UIViewController {
         var c = Int(arc4random_uniform(11) + 1)
         
         var z = 9
+        var b = 100
+        var d = 9
         
         var q = Int(y - x)
         
@@ -150,7 +161,7 @@ class ViewController: UIViewController {
         
         }
     
-    let operatorArray = ["*", "-", "+"]
+    let operatorArray = ["*", "-", "+", "/"]
     let operatorArray2 = ["+", "*", "-"]
     
     let randomIndex = Int(arc4random_uniform(UInt32(operatorArray.count)))
@@ -158,7 +169,28 @@ class ViewController: UIViewController {
         
     let RandomOperator = operatorArray[randomIndex]
     let RandomOperator2 = operatorArray[randomIndex2]
+        
+    if RandomOperator == "/" {
+     
+         x = Int(arc4random_uniform(100) + 11)
+        
+         y = Int(arc4random_uniform(11) + 1)
+        
+        var modulo = x % y
+    
+        if modulo != 0 {
 
+        x -= x%y
+            
+        
+    }
+        
+    var res = x/y
+        
+        QlueLabel.text = "\(y) * \(res) = \(x)  "
+        
+     }
+    
     if RandomOperator == "*" || RandomOperator2 == "*"{ //&& Levelnivå > 2 {
         
  
@@ -174,7 +206,7 @@ class ViewController: UIViewController {
         }
         
         }
-    
+        
     if RandomOperator == "+" && Levelnivå >= 1  {
         
         if x >= 1 {
@@ -184,6 +216,9 @@ class ViewController: UIViewController {
         var hej = ((Summa)%10)
     
         var skillnad = 10 - ((x)%10)
+        
+        var nyttX = x - ((x)%10)
+        var nyttY = y + ((x)%10)
            
         var plusxskillnad = x + skillnad
         var plusyskillnad = y - skillnad
@@ -194,8 +229,13 @@ class ViewController: UIViewController {
         QlueLabel.text = "No qlue for this easy one, I'm sure you can figure it out yourself"
         
             if  x%10 != 0 && y%10 != 0 {
+              
+                if x > 11 {
+                QlueLabel.text = "\(nyttX) + \(nyttY)"
+                
+                }
            
-                if skillnad == 1 || skillnad == 2 || skillnad == 3 || skillnad == 4  {
+            /* if skillnad == 1 || skillnad == 2 || skillnad == 3 || skillnad == 4  {
                     
                      QlueLabel.text = "\(plusxskillnad) + \(plusyskillnad)"
                     
@@ -203,7 +243,7 @@ class ViewController: UIViewController {
                 
                     QlueLabel.text = "\(plusxskillnad) + \(plusyskillnad)"
        
-                }
+                }*/
             }
         }
     }
@@ -222,21 +262,18 @@ class ViewController: UIViewController {
         QlueLabel.text = "No qlue for this easy one, I'm sure you can figure it out yourself"
         var modulo = x%10
         
-        if x >= 1 && modulo != 0{
+        if y <= 9 && modulo != 0{
             
             var xminus = x - modulo
             var yplus = y + modulo
             
-            QlueLabel.text = "\(xminus) - \(yplus)"
-            
+            Qlue = String(repeating: "\(1)-", count: y-1) + "\(1)"
+            QlueLabel.text = "\(x) - \(Qlue)"
         }
-            
         }
-        
-   // Tal.text = "\(x) \(RandomOperator) \(y)"
        
-        if Levelnivå < 5 { let expression = NSExpression(format:"\(x) \(RandomOperator) \(y)")
-   if let result = expression.expressionValue(with: nil, context: nil) as? NSNumber {
+    if Levelnivå < 5 { let expression = NSExpression(format:"\(x) \(RandomOperator) \(y)")
+    if let result = expression.expressionValue(with: nil, context: nil) as? NSNumber {
     
      Tal.text = "\(x) \(RandomOperator) \(y)"
     RättSvar = Int(result)
@@ -250,13 +287,63 @@ class ViewController: UIViewController {
     if let result = expression.expressionValue(with: nil, context: nil) as? NSNumber {
                 
     Tal.text = "\(x) \(RandomOperator) \(y) \(RandomOperator2) \(c)"
+        
+        if RandomOperator2 == "/" {
+             let operatorArray = ["*", "-", "+"]
+             let RandomOperator = operatorArray[randomIndex]
+            
+        }
+        
+        if RandomOperator == "/" {
+            let operatorArray = ["*", "-", "+"]
+            let RandomOperator2 = operatorArray[randomIndex]
+            
+        }
+        
+        if RandomOperator == "/" || RandomOperator2 == "/" {
+            
+          y = Int(arc4random_uniform(9) + 1)
+            
+          c = Int(arc4random_uniform(9) + 1)
+            
+            if RandomOperator == "/" {
+                
+                
+            }
+            
+            if x > y {
+                
+                x -= x%y
+                
+            }
+            
+            if RandomOperator2 == "/" {
+                
+                
+            }
+            
+            if y > c {
+            
+                y -= y%c
+                
+            }
+            
+            
+        }
+        
     RättSvar = Int(result)
+        
+        
+        
     print(result)
             }
             
             return
         }
     }
+
+ 
+    
 
     @IBAction func RättaKnapp_press(_ sender: AnyObject) {
         
@@ -271,8 +358,6 @@ class ViewController: UIViewController {
             Levelnivå = 1
             liv1.isHidden = false
             liv2.isHidden = false
-            liv3.isHidden = false
-            
             
         }
         
@@ -302,13 +387,9 @@ class ViewController: UIViewController {
                     LevelPoäng = 0
                     Levelnivå += 1
                     Level.text = String(Levelnivå)
-                    
-            
                 }
             
             } else if RättaKnapp.titleLabel?.text == "Starta" {
-                
-              
             }
             
             SkapaTal()
@@ -323,14 +404,9 @@ class ViewController: UIViewController {
             refreshFörsök()
           
             livkvar()
-            
         }
-
         return
-        
     }
-
-
 
     func livkvar() {
         
@@ -378,19 +454,13 @@ class ViewController: UIViewController {
     
         }
     }
-
-    
     func refreshFörsök() {
         
         FörsökRäknare.text = String(Försök)
-        
     }
     
     func retrieveHighscore() {
-        
         let uid = FIRAuth.auth()?.currentUser?.uid
-        
-       
     }
     
     func ShowScoreBoard(){
@@ -408,20 +478,24 @@ class ViewController: UIViewController {
         let uid = FIRAuth.auth()?.currentUser?.uid
         ref.child("users").child(uid!).observe(FIRDataEventType.value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
+       
             let highscore = value?["highscore"] as? Int
+            let neghighscore = value?["neghighscore"] as? Int
+            
+   
+            
             if highscore != nil{
             self.globalHS = highscore!
             }
         })
-        
-       
         var highscorepoints = Poäng
          if globalHS < highscorepoints || globalHS == nil {
         var ref = FIRDatabase.database().reference(fromURL: "https://mathhack-7451e.firebaseio.com/")
         var usersReference = ref.child("users").child(uid!)
-        let values = ["highscore": highscorepoints]
+        let values = ["highscore": highscorepoints, "neghighscore": -highscorepoints]
         
-           
+        
+    
         usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
             if err != nil{
                 print(err)
@@ -430,28 +504,21 @@ class ViewController: UIViewController {
             
             print("score updated")
             self.globalHS = highscorepoints
-          //  self.dismiss(animated: true, completion: nil)
-            
-            
+            self.globalHSNEG = -highscorepoints
         })
             
         }
-        
         ShowScoreBoard()
-        
     }
     
     @IBAction func QlueButtonPressed(_ sender: UIButton) {
         
     }
-                            
-    
     var GameSettingsVC = GameSettingsViewController()
     
     @IBAction func SettingsPressed(_ sender: AnyObject) {
         
          HandleMore()
-        
     }
     
     lazy var settingsLauncher: SettingsLauncher = {
@@ -479,7 +546,6 @@ class ViewController: UIViewController {
         if setting.name == "Scoreboard"{
             performSegue(withIdentifier: "Scoreboard", sender: Any?.self)
         }
-
     }
     
     @IBAction func QluebuttonIsPressed(_ sender: AnyObject) {
@@ -493,8 +559,8 @@ class ViewController: UIViewController {
             QlueLabel.isHidden = true
         }
     }
-    
       var globalHS = Int()
+        var globalHSNEG = Int()
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ScoreView" {
             
@@ -502,12 +568,7 @@ class ViewController: UIViewController {
 
             destination.RetrievedScore = Poäng
          
-         
         }
     }
-
-    
-    
-
 }
 

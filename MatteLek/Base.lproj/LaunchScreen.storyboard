@@ -21,18 +21,26 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Calculator_flat_Icon_png" translatesAutoresizingMaskIntoConstraints="NO" id="mhw-gq-VZg">
                                 <color key="backgroundColor" red="0.3843137254901961" green="0.58823529411764708" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MathHack " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcc-Lw-RaU">
-                                <frame key="frameInset" minX="41" minY="138" width="292" height="74"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="50"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qtS-Do-pQL">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MathHack " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcc-Lw-RaU">
+                                        <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="50"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="61" id="S4P-Sv-WpY"/>
+                                    <constraint firstAttribute="width" constant="295" id="yz6-Ca-MLA"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="mhw-gq-VZg" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="6ub-Yq-wPk"/>
+                            <constraint firstItem="qtS-Do-pQL" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="fqJ-XZ-sDx"/>
                             <constraint firstAttribute="trailing" secondItem="mhw-gq-VZg" secondAttribute="trailing" id="j9T-dl-Ihd"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="qtS-Do-pQL" secondAttribute="bottom" constant="468" id="qAR-t9-S3u"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="mhw-gq-VZg" secondAttribute="bottom" id="seT-Fq-8OK"/>
                             <constraint firstItem="mhw-gq-VZg" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="vrz-5X-UJI"/>
                         </constraints>

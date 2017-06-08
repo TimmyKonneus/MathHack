@@ -74,6 +74,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.isNavigationBarHidden = false
+        
         RättaKnapp.setTitle("Starta", for: .normal)
        
         ref = FIRDatabase.database().reference()
@@ -98,6 +99,7 @@ class ViewController: UIViewController {
         if RättaKnapp.titleLabel?.text == "Starta" {
 
             SvarInput.isUserInteractionEnabled = false
+            
             
         }
     }
@@ -162,7 +164,7 @@ class ViewController: UIViewController {
         }
     
     let operatorArray = ["*", "-", "+", "/"]
-    let operatorArray2 = ["+", "*", "-"]
+    let operatorArray2 = ["+", "*", "-","-"]
     
     let randomIndex = Int(arc4random_uniform(UInt32(operatorArray.count)))
     let randomIndex2 = Int(arc4random_uniform(UInt32(operatorArray2.count)))
@@ -172,9 +174,10 @@ class ViewController: UIViewController {
         
     if RandomOperator == "/" {
      
-         x = Int(arc4random_uniform(100) + 11)
-        
          y = Int(arc4random_uniform(11) + 1)
+         x = Int(arc4random_uniform(100) + 110) + y
+        
+        
         
         var modulo = x % y
     
@@ -289,13 +292,13 @@ class ViewController: UIViewController {
     Tal.text = "\(x) \(RandomOperator) \(y) \(RandomOperator2) \(c)"
         
         if RandomOperator2 == "/" {
-             let operatorArray = ["*", "-", "+"]
+             let operatorArray = ["*", "-", "+","+"]
              let RandomOperator = operatorArray[randomIndex]
             
         }
         
         if RandomOperator == "/" {
-            let operatorArray = ["*", "-", "+"]
+            let operatorArray = ["*", "-", "+","+"]
             let RandomOperator2 = operatorArray[randomIndex]
             
         }
@@ -473,7 +476,10 @@ class ViewController: UIViewController {
         RättaKnapp.setTitle("Starta", for: .normal)
         Tal.text = ""
         SvarInput.isUserInteractionEnabled = false
-
+        
+        liv1.isHidden = false
+        liv2.isHidden = false
+        liv3.isHidden = false
         
         let uid = FIRAuth.auth()?.currentUser?.uid
         ref.child("users").child(uid!).observe(FIRDataEventType.value, with: { (snapshot) in

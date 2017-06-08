@@ -30,8 +30,17 @@ class ScoreboardTableViewController: UITableViewController {
         
         
          fetchHighscore()
+        
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(Back))
     }
 
+    func Back() {
+        
+        self.navigationController?.isNavigationBarHidden = true
+        performSegue(withIdentifier: "BackToMain", sender: navigationItem.leftBarButtonItem)
+        
+    }
     
 
     func fetchHighscore() {

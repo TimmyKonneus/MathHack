@@ -13,7 +13,10 @@ class GameSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        StandardImage.isHidden = false
+        EeasyImage.isHidden = true
+        MediumImage.isHidden = true
+        HardImage.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +24,51 @@ class GameSettingsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBOutlet weak var StandardOutlet: UIButton!
+    @IBOutlet weak var easyOutlet: UIButton!
+    @IBOutlet weak var MediumOutlet: UIButton!
+    @IBOutlet weak var HardOutlet: UIButton!
+    
+    @IBOutlet weak var StandardImage: UIImageView!
+    
+    @IBOutlet weak var EeasyImage: UIImageView!
+    
+    @IBOutlet weak var MediumImage: UIImageView!
+    
+    @IBOutlet weak var HardImage: UIImageView!
+    
+    @IBAction func Standard(_ sender: AnyObject) {
+        
+    StandardImage.isHidden = false
+    EeasyImage.isHidden = true
+    MediumImage.isHidden = true
+    HardImage.isHidden = true
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
     }
-    */
+ 
+    @IBAction func easy(_ sender: AnyObject) {
+        
+        StandardImage.isHidden = true
+        EeasyImage.isHidden = false
+        MediumImage.isHidden = true
+        HardImage.isHidden = true
+        
+    }
 
+    @IBAction func medium(_ sender: AnyObject) {
+        
+        StandardImage.isHidden = true
+        EeasyImage.isHidden = true
+        MediumImage.isHidden = false
+        HardImage.isHidden = true
+    }
+    
+    @IBAction func hard(_ sender: AnyObject) {
+        
+        StandardImage.isHidden = true
+        EeasyImage.isHidden = true
+        MediumImage.isHidden = true
+        HardImage.isHidden = false
+    }
 }

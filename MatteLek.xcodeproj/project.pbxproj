@@ -26,6 +26,7 @@
 		A55EA1601EA39CCA0003C76A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A55EA15F1EA39CCA0003C76A /* GoogleService-Info.plist */; };
 		A55EA1631EA803D00003C76A /* ScoreboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EA1621EA803D00003C76A /* ScoreboardView.swift */; };
 		A58805121EA15CE200533BB5 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58805111EA15CE200533BB5 /* SettingsLauncher.swift */; };
+		A5F869481EEDFFC7002FB014 /* Sample.mp3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A5F869471EEDFFC7002FB014 /* Sample.mp3.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		A55EA1611EA3B7D10003C76A /* MatteLek.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MatteLek.entitlements; sourceTree = "<group>"; };
 		A55EA1621EA803D00003C76A /* ScoreboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardView.swift; sourceTree = "<group>"; };
 		A58805111EA15CE200533BB5 /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
+		A5F869471EEDFFC7002FB014 /* Sample.mp3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sample.mp3.mp3; sourceTree = "<group>"; };
 		B69DE98BE767F059613E6292 /* Pods-MatteLek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatteLek.release.xcconfig"; path = "Pods/Target Support Files/Pods-MatteLek/Pods-MatteLek.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +157,7 @@
 				A51E66D71EE4743E006B74D7 /* UserTableViewCell.swift */,
 				A55EA1621EA803D00003C76A /* ScoreboardView.swift */,
 				A500B4151E8D556B0025EBC9 /* Assets.xcassets */,
+				A5F869461EEDFF9D002FB014 /* music */,
 				A500B4171E8D556B0025EBC9 /* LaunchScreen.storyboard */,
 				A55EA15F1EA39CCA0003C76A /* GoogleService-Info.plist */,
 				A500B41A1E8D556B0025EBC9 /* Info.plist */,
@@ -206,6 +209,14 @@
 				A51E66CF1EE42CBF006B74D7 /* ScoreboardTableViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		A5F869461EEDFF9D002FB014 /* music */ = {
+			isa = PBXGroup;
+			children = (
+				A5F869471EEDFFC7002FB014 /* Sample.mp3.mp3 */,
+			);
+			name = music;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +342,7 @@
 			files = (
 				A500B4191E8D556B0025EBC9 /* LaunchScreen.storyboard in Resources */,
 				A500B4161E8D556B0025EBC9 /* Assets.xcassets in Resources */,
+				A5F869481EEDFFC7002FB014 /* Sample.mp3.mp3 in Resources */,
 				A55EA1601EA39CCA0003C76A /* GoogleService-Info.plist in Resources */,
 				A500B4141E8D556B0025EBC9 /* Main.storyboard in Resources */,
 			);

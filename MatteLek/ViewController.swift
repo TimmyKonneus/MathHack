@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
-
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -36,26 +36,42 @@ class ViewController: UIViewController {
     @IBAction func Numbers(_ sender: UIButton) {
         
         SvarInput.text = SvarInput.text! + String(sender.tag-1)
+        
+        audioPlayer.currentTime = 0
+        audioPlayer.play()
     }
     
     @IBAction func clearInput(_ sender: AnyObject) {
         
         SvarInput.text = ""
+        
+        audioPlayer.currentTime = 0
+        audioPlayer.play()
     }
     
    
     @IBAction func MakeInputNegative(_ sender: AnyObject) {
+        
+        audioPlayer.currentTime = 0
+        audioPlayer.play()
+        
         var minus = "-"
-     
+        
         if SvarInput.text?.hasPrefix(minus) == false {
         var minus = "-"
         SvarInput.text = String(minus + SvarInput.text!)
+
             
-        } else if Int(SvarInput.text!)! < 0 {
-            
+        } else if SvarInput.text?.hasPrefix(minus) == true {
+     
      SvarInput.text?.remove(at: (SvarInput.text?.startIndex)!)
+          
+            
+        } else if SvarInput.text?.hasPrefix(minus) == true {
+            SvarInput.text = "-"
             
         }
+       
 
     }
     var Poäng = Int()
@@ -68,14 +84,25 @@ class ViewController: UIViewController {
     var ref: FIRDatabaseReference!
     var refHandle: UInt!
     
+    var audioPlayer = AVAudioPlayer()
+    
     @IBOutlet weak var RättEllerFelMSG: UILabel!
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Sample.mp3", ofType: "mp3")!))
+            audioPlayer.prepareToPlay()
+        }
+        catch{
+            print(error)
+        }
+        
+        
         self.navigationController?.isNavigationBarHidden = false
         
-        RättaKnapp.setTitle("Starta", for: .normal)
+        RättaKnapp.setTitle("Start", for: .normal)
        
         ref = FIRDatabase.database().reference()
         refHandle = ref.observe(FIRDataEventType.value, with: { (snapshot) in
@@ -96,7 +123,7 @@ class ViewController: UIViewController {
         
         RättaKnapp.layer.cornerRadius = 12
       
-        if RättaKnapp.titleLabel?.text == "Starta" {
+        if RättaKnapp.titleLabel?.text == "Start" {
 
             SvarInput.isUserInteractionEnabled = false
             
@@ -350,7 +377,7 @@ class ViewController: UIViewController {
 
     @IBAction func RättaKnapp_press(_ sender: AnyObject) {
         
-        if RättaKnapp.titleLabel?.text == "Starta"{
+        if RättaKnapp.titleLabel?.text == "Start"{
             RättaKnapp.isUserInteractionEnabled = true
             Poäng = 0
             Försök = 3
@@ -365,10 +392,10 @@ class ViewController: UIViewController {
         }
         
         LevelRäknare.text = String(Levelnivå)
-        RättaKnapp.setTitle("Rätta", for: .normal)
+        RättaKnapp.setTitle("Check", for: .normal)
         SvarInput.isUserInteractionEnabled = true
     
-        if RättSvar == Int(SvarInput.text!) || RättaKnapp.titleLabel?.text == "Starta" {
+        if RättSvar == Int(SvarInput.text!) || RättaKnapp.titleLabel?.text == "Start" {
             
             if RättSvar == Int(SvarInput.text!){
             RättEllerFelMSG.text = "RÄTT"
@@ -392,7 +419,7 @@ class ViewController: UIViewController {
                     Level.text = String(Levelnivå)
                 }
             
-            } else if RättaKnapp.titleLabel?.text == "Starta" {
+            } else if RättaKnapp.titleLabel?.text == "Start" {
             }
             
             SkapaTal()
@@ -473,7 +500,7 @@ class ViewController: UIViewController {
     func gameover() {
         
         RättEllerFelMSG.text = "GAME OVER"
-        RättaKnapp.setTitle("Starta", for: .normal)
+        RättaKnapp.setTitle("Start", for: .normal)
         Tal.text = ""
         SvarInput.isUserInteractionEnabled = false
         

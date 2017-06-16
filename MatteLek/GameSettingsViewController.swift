@@ -10,8 +10,54 @@ import UIKit
 
 class GameSettingsViewController: UIViewController {
 
+    @IBOutlet weak var SoundSwitch: UISwitch!
+    
+    var OnOff = Bool(true)
+
+    @IBAction func OnOff(_ sender: AnyObject) {
+     
+       if (sender.isOn) == true {
+            
+            OnOff = true
+        
+        }
+        else
+        {
+        if (sender.isOn) == false {
+                
+            OnOff = false
+            
+            }
+        }
+    }
+    var EasyX = Int(arc4random_uniform(UInt32(10)) + 1)
+    var EasyY = Int(arc4random_uniform(UInt32(10)) + 1)
+    
+    var MediumX = Int(arc4random_uniform(UInt32(50)) + 1)
+    var MediumY = Int(arc4random_uniform(UInt32(50)) + 1)
+    
+    var HardX = Int(arc4random_uniform(UInt32(200)) + 1)
+    var HardY = Int(arc4random_uniform(UInt32(200)) + 1)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+    
+        
+      if OnOff == true {
+            
+         SoundSwitch.isOn = true
+           // SoundSwitch.setOn(true, animated: true)
+        }
+        else
+            if OnOff == false {
+            
+                SoundSwitch.isOn = false
+           // SoundSwitch.setOn(false, animated: true)
+        }
+        
+       print(OnOff)
 
         StandardImage.isHidden = false
         EeasyImage.isHidden = true
@@ -53,7 +99,7 @@ class GameSettingsViewController: UIViewController {
         EeasyImage.isHidden = false
         MediumImage.isHidden = true
         HardImage.isHidden = true
-        
+        print(OnOff)
     }
 
     @IBAction func medium(_ sender: AnyObject) {
@@ -70,5 +116,25 @@ class GameSettingsViewController: UIViewController {
         EeasyImage.isHidden = true
         MediumImage.isHidden = true
         HardImage.isHidden = false
+    }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "SavedSettings"{
+       
+            let destination = segue.destination as! ViewController
+            
+          
+         destination.sound = OnOff
+            
+            if EeasyImage.isHidden == false {
+                
+                destination.EasyX = EasyX
+            }
+            
+        }
+        
     }
 }

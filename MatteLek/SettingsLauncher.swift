@@ -34,11 +34,11 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
     var cellHeight: CGFloat = 50
     let cellId = "cellId"
    
+    //Setting(name: "Change difficulty", imageName: "001-controls")
     
     let settings: [Setting] = {
         
-        return[Setting(name: "Change difficulty", imageName: "001-controls"),
-        Setting(name: "Scoreboard", imageName: "002-medal"), Setting(name: "Game Settings", imageName: "settings"), Setting(name: "Cancel", imageName: "error")]
+        return[Setting(name: "Scoreboard", imageName: "002-medal"), Setting(name: "Game Settings", imageName: "settings"), Setting(name: "Cancel", imageName: "error")]
     }()
     
     var ViewController: ViewController?

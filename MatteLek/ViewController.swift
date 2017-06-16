@@ -12,7 +12,9 @@ import FBSDKLoginKit
 import AVFoundation
 
 class ViewController: UIViewController {
-
+    
+     //var sound = Bool(true)
+    
     @IBOutlet weak var Level: UILabel!
     
     @IBOutlet weak var Tal: UILabel!
@@ -33,28 +35,44 @@ class ViewController: UIViewController {
     @IBOutlet weak var liv1: UIImageView!
     @IBOutlet weak var pointslabel: UIImageView!
     
+    var EasyX = Int(arc4random_uniform(UInt32(10)) + 1)
+    var EasyY = Int(arc4random_uniform(UInt32(10)) + 1)
+    
+    var MediumX = Int(arc4random_uniform(UInt32(50)) + 1)
+    var MediumY = Int(arc4random_uniform(UInt32(50)) + 1)
+    
+    var HardX = Int(arc4random_uniform(UInt32(200)) + 1)
+    var HardY = Int(arc4random_uniform(UInt32(200)) + 1)
+    
+    
+    
     @IBAction func Numbers(_ sender: UIButton) {
         
         SvarInput.text = SvarInput.text! + String(sender.tag-1)
-        
+       
+        if sound == true {
         audioPlayer.currentTime = 0
         audioPlayer.play()
+        }
     }
     
     @IBAction func clearInput(_ sender: AnyObject) {
         
         SvarInput.text = ""
         
+        if sound == true {
         audioPlayer.currentTime = 0
         audioPlayer.play()
+        }
     }
     
    
     @IBAction func MakeInputNegative(_ sender: AnyObject) {
         
+        if sound == true{
         audioPlayer.currentTime = 0
         audioPlayer.play()
-        
+        }
         var minus = "-"
         
         if SvarInput.text?.hasPrefix(minus) == false {
@@ -81,15 +99,19 @@ class ViewController: UIViewController {
     var LevelPoäng = Int()
     var Qlue = String()
     
+    
     var ref: FIRDatabaseReference!
     var refHandle: UInt!
     
     var audioPlayer = AVAudioPlayer()
     
+
+    
     @IBOutlet weak var RättEllerFelMSG: UILabel!
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Sample.mp3", ofType: "mp3")!))
@@ -129,6 +151,7 @@ class ViewController: UIViewController {
             
             
         }
+        print(Bool(sound))
     }
     
     func checkIfUserIsLoggedIn() {
@@ -169,64 +192,61 @@ class ViewController: UIViewController {
     FörsökRäknare.text = String(Försök)
         
     SvarInput.text = ""
-        
-        var x = Int(arc4random_uniform(10) + 1)
-        
-        var y = Int(arc4random_uniform(11) + 1)
+     
+        var y = Int(arc4random_uniform(11) + 2)
 
         var c = Int(arc4random_uniform(11) + 1)
+        
+        var x = Int(arc4random_uniform(11) + 1) + y
         
         var z = 9
         var b = 100
         var d = 9
         
-        var q = Int(y - x)
+       // var q = Int(y - x)
         
     if Levelnivå > 1 {
         
-        x = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 1)
-        y = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 1)
+        x = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 10) + y
+        y = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 2)
         c = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 1)
         
         }
     
-    let operatorArray = ["*", "-", "+", "/"]
-    let operatorArray2 = ["+", "*", "-","-"]
+    var operatorArray = ["+", "+", "+", "+"] 
+    let operatorArray2 = ["*", "*", "/","/"]
     
     let randomIndex = Int(arc4random_uniform(UInt32(operatorArray.count)))
     let randomIndex2 = Int(arc4random_uniform(UInt32(operatorArray2.count)))
         
-    let RandomOperator = operatorArray[randomIndex]
-    let RandomOperator2 = operatorArray[randomIndex2]
+    var RandomOperator = operatorArray[randomIndex]
+    var RandomOperator2 = operatorArray[randomIndex2]
         
-    if RandomOperator == "/" {
-     
-         y = Int(arc4random_uniform(11) + 1)
-         x = Int(arc4random_uniform(100) + 110) + y
-        
-        
-        
-        var modulo = x % y
-    
-        if modulo != 0 {
-
-        x -= x%y
+        let modulo = x % y
+        let modulo2 = y % c
+       
+        if x < 11 && y < 11 {
             
+        RandomOperator = "*"
+            
+        }
         
-    }
+    if Int(modulo) == 0 {
+    
+        RandomOperator = "/"
+ 
+        reloadInputViews()
+    
+     
+    let res = x/y
         
-    var res = x/y
-        
-        QlueLabel.text = "\(y) * \(res) = \(x)  "
+        QlueLabel.text = "\(y) * \(res) = \(x)"
         
      }
-    
+        
+
     if RandomOperator == "*" || RandomOperator2 == "*"{ //&& Levelnivå > 2 {
         
- 
-        x = Int(arc4random_uniform(UInt32(z)) + 1)
-        y = Int(arc4random_uniform(UInt32(z)) + 1)
-        c = Int(arc4random_uniform(UInt32(z)) + 1)
         
         if RandomOperator == "*" {
             
@@ -240,56 +260,79 @@ class ViewController: UIViewController {
     if RandomOperator == "+" && Levelnivå >= 1  {
         
         if x >= 1 {
-            
-        let Summa = x + y
-            
-        var hej = ((Summa)%10)
     
-        var skillnad = 10 - ((x)%10)
+        let AdditionModuloX = x%10
+        let AdditionModuloY = y%10
         
-        var nyttX = x - ((x)%10)
-        var nyttY = y + ((x)%10)
+        let nyttX = x - ((x)%10)
+        let nyttY = y + ((x)%10)
            
-        var plusxskillnad = x + skillnad
-        var plusyskillnad = y - skillnad
-        
-        var minusxskillnad = x - skillnad
-        var minusyskillnad = y + skillnad
+        let newX = x - AdditionModuloX
+        let newY = y - AdditionModuloY
             
-        QlueLabel.text = "No qlue for this easy one, I'm sure you can figure it out yourself"
+        QlueLabel.text = "\(newX) + \(AdditionModuloX) + \(newY) + \(AdditionModuloY)"
+            
+            
+            if AdditionModuloX == 0 {
+                
+                QlueLabel.text = "\(newX) + \(newY) + \(AdditionModuloY)"
+            }
+            
+            if AdditionModuloY == 0 {
+                
+                QlueLabel.text = "\(newX) + \(AdditionModuloX) + \(newY)"
+                
+            }
         
             if  x%10 != 0 && y%10 != 0 {
               
-                if x > 11 {
+                if x >= 11 {
                 QlueLabel.text = "\(nyttX) + \(nyttY)"
                 
                 }
-           
-            /* if skillnad == 1 || skillnad == 2 || skillnad == 3 || skillnad == 4  {
+            }
+            if x < 11 && x > 1{
                     
-                     QlueLabel.text = "\(plusxskillnad) + \(plusyskillnad)"
-                    
-                } else if skillnad == 5 || skillnad == 6 || skillnad == 7 || skillnad == 8 || skillnad == 9{
-                
-                    QlueLabel.text = "\(plusxskillnad) + \(plusyskillnad)"
-       
-                }*/
+                     QlueLabel.text = String(repeating: "\(1)+", count: x-1) + "\(1) + \(y)"
+                }
             }
         }
-    }
     
     
     if RandomOperator == "-" && Levelnivå < 5 {
         
         if y > x {
         
-        var negativ_mellanskillnad = q * q
+    let q = x-y
+    let negativ_mellanskillnad = q * q
         
-         x += negativ_mellanskillnad * 2
+     x += negativ_mellanskillnad * 2
         
         }
         
-        QlueLabel.text = "No qlue for this easy one, I'm sure you can figure it out yourself"
+        let SubModuloX = x%10
+        let SubModuloY = y%10
+        
+        let nyttX = x - ((x)%10)
+        let nyttY = y + ((x)%10)
+        
+        let newX = x - SubModuloX
+        let newY = y - SubModuloY
+        
+        
+        QlueLabel.text = "\(newX) + \(SubModuloX) - \(newY) + \(SubModuloY)"
+        
+        if SubModuloX == 0 {
+            
+            QlueLabel.text = "\(newX) - \(newY) + \(SubModuloY)"
+        }
+        
+        if SubModuloY == 0 {
+            
+            QlueLabel.text = "\(newX) + \(SubModuloX) - \(newY)"
+        
+        }
+        
         var modulo = x%10
         
         if y <= 9 && modulo != 0{
@@ -301,7 +344,130 @@ class ViewController: UIViewController {
             QlueLabel.text = "\(x) - \(Qlue)"
         }
         }
-       
+        
+        if Levelnivå >= 5 {
+            
+            let ModuloX = x%10
+            let ModuloY = y%10
+            let ModuloC = c%10
+            
+            let nyttX = x - ((x)%10)
+            let nyttY = y + ((x)%10)
+            
+            let newX = x - ModuloX
+            let newY = y - ModuloY
+            let newC = c - ModuloC
+            
+            let XPlusY = x+y
+            let XMinusY = x-y
+            
+            let modulo = x % y
+            let modulo2 = y % c
+            
+            var divRes = x/y
+            var divRes2 = y/c
+            
+           if Int(modulo) == 0 {
+           // RandomOperator = "/"
+            }
+            
+           if Int(modulo2) == 0 {
+            RandomOperator2 = "/"
+            
+            }
+            
+            //Quelabel för addition kombinerat med RandomOperator2
+            
+            if RandomOperator == "+" && RandomOperator2 == "+" {
+                
+                QlueLabel.text = "(\(newX) + \(ModuloX)) + (\(newY) + \(ModuloY)) + (\(newC) + \(ModuloC))"
+            }
+            if RandomOperator == "+" && RandomOperator2 == "-" {
+                
+                QlueLabel.text = "(\(newX) + \(ModuloX)) + (\(newY) + \(ModuloY)) - (\(newC) + \(ModuloC))"
+            }
+            if RandomOperator == "+" && RandomOperator2 == "*" {
+                
+                QlueLabel.text = "(\(newX) + \(ModuloX)) + ((\(newY) + \(ModuloY)) + (\(String(repeating: "\(y)+", count: c-1))))"
+            }
+            if RandomOperator == "+" && RandomOperator2 == "/" {
+                
+                QlueLabel.text = "(\(newX) + \(ModuloX)) + (\(divRes2) * \(c) / (\(c))"
+                
+                if divRes2 == 1 {
+                    
+                    QlueLabel.text = "(\(newX) + \(ModuloX)) + \(1)"
+                }
+            }
+            
+            //Quelabel för subtraktion kombinerat med RandomOperator2
+            
+            if RandomOperator == "-" && RandomOperator2 == "-" {
+                
+                
+            }
+            
+            if RandomOperator == "-" && RandomOperator2 == "+" {
+                
+                
+            }
+            
+            if RandomOperator == "-" && RandomOperator2 == "*" {
+                
+                
+            }
+            
+            if RandomOperator == "-" && RandomOperator2 == "/" {
+                
+                
+            }
+            
+            //Quelabel för multiplikation kombinerat med RandomOperator2
+            
+            if RandomOperator == "*" && RandomOperator2 == "*" {
+                
+                
+            }
+            
+            if RandomOperator == "*" && RandomOperator2 == "-" {
+                
+                
+            }
+            
+            if RandomOperator == "*" && RandomOperator2 == "+" {
+                
+                
+            }
+            
+            if RandomOperator == "*" && RandomOperator2 == "/" {
+                
+                
+            }
+            
+            //Quelabel för division kombinerat med RandomOperator2
+            
+            if RandomOperator == "/" && RandomOperator2 == "/" {
+                
+                
+            }
+            
+            if RandomOperator == "/" && RandomOperator2 == "-" {
+                
+                
+            }
+            
+            if RandomOperator == "/" && RandomOperator2 == "+" {
+                
+                
+            }
+            
+            if RandomOperator == "/" && RandomOperator2 == "*" {
+                
+                
+            }
+            
+        }
+        
     if Levelnivå < 5 { let expression = NSExpression(format:"\(x) \(RandomOperator) \(y)")
     if let result = expression.expressionValue(with: nil, context: nil) as? NSNumber {
     
@@ -318,7 +484,7 @@ class ViewController: UIViewController {
                 
     Tal.text = "\(x) \(RandomOperator) \(y) \(RandomOperator2) \(c)"
         
-        if RandomOperator2 == "/" {
+       /* if RandomOperator2 == "/" {
              let operatorArray = ["*", "-", "+","+"]
              let RandomOperator = operatorArray[randomIndex]
             
@@ -328,26 +494,25 @@ class ViewController: UIViewController {
             let operatorArray = ["*", "-", "+","+"]
             let RandomOperator2 = operatorArray[randomIndex]
             
-        }
+        }*/
         
-        if RandomOperator == "/" || RandomOperator2 == "/" {
+      /* if RandomOperator == "/" || RandomOperator2 == "/" {
             
           y = Int(arc4random_uniform(9) + 1)
             
           c = Int(arc4random_uniform(9) + 1)
             
-            if RandomOperator == "/" {
-                
-                
+          //  if RandomOperator == "/" {
+            
             }
             
             if x > y {
                 
                 x -= x%y
                 
-            }
+            }*/
             
-            if RandomOperator2 == "/" {
+         /*   if RandomOperator2 == "/" {
                 
                 
             }
@@ -357,22 +522,24 @@ class ViewController: UIViewController {
                 y -= y%c
                 
             }
-            
-            
-        }
+        }*/
         
     RättSvar = Int(result)
         
-        
-        
+    
     print(result)
-            }
+        
+        }
             
             return
         }
     }
 
  
+    @IBAction func refreshtal(_ sender: AnyObject) {
+        
+        SkapaTal()
+    }
     
 
     @IBAction func RättaKnapp_press(_ sender: AnyObject) {
@@ -566,20 +733,8 @@ class ViewController: UIViewController {
         settingsLauncher.showSettings()
     }
     
-    func showControllersForSetting(setting: Setting){
-        
-            if setting.name == "Change difficulty"{
-         performSegue(withIdentifier: "ChangeDifficulty", sender: Any?.self)
-        }
-        
-        if setting.name == "Game Settings"{
-            performSegue(withIdentifier: "GameSettings", sender: Any?.self)
-        }
-        
-        if setting.name == "Scoreboard"{
-            performSegue(withIdentifier: "Scoreboard", sender: Any?.self)
-        }
-    }
+ 
+    
     
     @IBAction func QluebuttonIsPressed(_ sender: AnyObject) {
         
@@ -594,14 +749,67 @@ class ViewController: UIViewController {
     }
       var globalHS = Int()
         var globalHSNEG = Int()
+        var sound = Bool(true)
+    
+    var OnOff = String()
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if sound == true {
+            
+            OnOff = "1"
+        }
+        else
+        {
+            OnOff = "2"
+        }
+        
         if segue.identifier == "ScoreView" {
             
             let destination = segue.destination as! ScoreboardView
 
             destination.RetrievedScore = Poäng
-         
+            
+            if segue.identifier == "GameSettings"{
+                
+                let destination = segue.destination as! GameSettingsViewController
+            
+               if sound == true {
+                 
+             destination.OnOff = (true as? Bool)!
+            //destination.SoundSwitch.setOn(true, animated: true)
+    
+            
+                }
+                else if sound == false
+                {
+                 
+                   destination.OnOff = (false as? Bool)!
+                  //  destination.SoundSwitch.setOn(false, animated: false)
+                }
+                
+            //destination.OnOff = Bool(sound)
+           // destination.hej = "1"
+            
         }
     }
+    }
+    
+    func showControllersForSetting(setting: Setting){
+        
+        if setting.name == "Change difficulty"{
+            performSegue(withIdentifier: "ChangeDifficulty", sender: Any?.self)
+        }
+        
+        if setting.name == "Game Settings"{
+            performSegue(withIdentifier: "GameSettings", sender: Any?.self)
+        }
+        
+        if setting.name == "Scoreboard"{
+            performSegue(withIdentifier: "Scoreboard", sender: Any?.self)
+        }
+    
+}
 }
 

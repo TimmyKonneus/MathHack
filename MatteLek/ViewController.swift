@@ -35,6 +35,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var liv1: UIImageView!
     @IBOutlet weak var pointslabel: UIImageView!
     
+    @IBAction func INFOVIEW(_ sender: AnyObject) {
+        
+        performSegue(withIdentifier: "INFOVIEW", sender: Any?.self)
+    }
     var EasyX = Int(arc4random_uniform(UInt32(10)) + 1)
     var EasyY = Int(arc4random_uniform(UInt32(10)) + 1)
     
@@ -48,12 +52,15 @@ class ViewController: UIViewController {
     
     @IBAction func Numbers(_ sender: UIButton) {
         
+        sender.backgroundColor?.withAlphaComponent(0.1)
         SvarInput.text = SvarInput.text! + String(sender.tag-1)
        
         if sound == true {
         audioPlayer.currentTime = 0
         audioPlayer.play()
         }
+        
+        sender.backgroundColor?.withAlphaComponent(0.7)
     }
     
     @IBAction func clearInput(_ sender: AnyObject) {
@@ -112,6 +119,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Levelnivå = 5
         
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Sample.mp3", ofType: "mp3")!))
@@ -209,12 +217,14 @@ class ViewController: UIViewController {
         
         x = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 10) + y
         y = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 2)
-        c = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 1)
+        c = Int(arc4random_uniform(UInt32(20)) + 1)
+        
+        
         
         }
     
-    var operatorArray = ["+", "+", "+", "+"] 
-    let operatorArray2 = ["*", "*", "/","/"]
+    var operatorArray = ["+", "+", "-", "-"]
+    let operatorArray2 = ["*", "+", "-","-"]
     
     let randomIndex = Int(arc4random_uniform(UInt32(operatorArray.count)))
     let randomIndex2 = Int(arc4random_uniform(UInt32(operatorArray2.count)))
@@ -347,9 +357,9 @@ class ViewController: UIViewController {
         
         if Levelnivå >= 5 {
             
-            let ModuloX = x%10
-            let ModuloY = y%10
-            let ModuloC = c%10
+            var ModuloX = x%10
+            var ModuloY = y%10
+            var ModuloC = c%10
             
             let nyttX = x - ((x)%10)
             let nyttY = y + ((x)%10)
@@ -360,12 +370,20 @@ class ViewController: UIViewController {
             
             let XPlusY = x+y
             let XMinusY = x-y
+            let XmultY = x*y
             
             let modulo = x % y
             let modulo2 = y % c
             
             var divRes = x/y
             var divRes2 = y/c
+            
+            var XmultYxModuloC = XmultY * ModuloC
+            
+            if c < 10 {
+                
+                RandomOperator2 = "*"
+            }
             
            if Int(modulo) == 0 {
            // RandomOperator = "/"
@@ -376,11 +394,13 @@ class ViewController: UIViewController {
             
             }
             
+            
             //Quelabel för addition kombinerat med RandomOperator2
             
             if RandomOperator == "+" && RandomOperator2 == "+" {
                 
                 QlueLabel.text = "(\(newX) + \(ModuloX)) + (\(newY) + \(ModuloY)) + (\(newC) + \(ModuloC))"
+                
             }
             if RandomOperator == "+" && RandomOperator2 == "-" {
                 
@@ -388,7 +408,7 @@ class ViewController: UIViewController {
             }
             if RandomOperator == "+" && RandomOperator2 == "*" {
                 
-                QlueLabel.text = "(\(newX) + \(ModuloX)) + ((\(newY) + \(ModuloY)) + (\(String(repeating: "\(y)+", count: c-1))))"
+                QlueLabel.text = "(\(newX) + \(ModuloX)) + (\(String(repeating: "\(y)+", count: c-1))"
             }
             if RandomOperator == "+" && RandomOperator2 == "/" {
                 
@@ -404,43 +424,71 @@ class ViewController: UIViewController {
             
             if RandomOperator == "-" && RandomOperator2 == "-" {
                 
+               // QlueLabel.text = "(\(newX) + \(ModuloX)) - (\(newY) + \(ModuloY)) - (\(newC) + \(ModuloC))"
                 
+                QlueLabel.text = "(\(newX) - \(newY) - \(newC)) - (\(ModuloX) - \(ModuloY) - \(ModuloC))"
             }
             
             if RandomOperator == "-" && RandomOperator2 == "+" {
                 
+                 QlueLabel.text = "(\(newX) + \(ModuloX)) - (\(newY) + \(ModuloY)) + (\(newC) + \(ModuloC))"
                 
             }
             
             if RandomOperator == "-" && RandomOperator2 == "*" {
                 
+                if x < 10 {
                 
+                QlueLabel.text = "(\(newX) + \(ModuloX)) - (\(String(repeating: "\(y)+", count: c-1))))"
+                }
+                else
+                {
+                QlueLabel.text = "(\(newX) + \(ModuloX)) - (\(String(repeating: "\(y)+", count: c-1))))"
+
+                }
             }
             
             if RandomOperator == "-" && RandomOperator2 == "/" {
                 
-                
+                QlueLabel.text = "(\(newX) + \(ModuloX)) - (\(divRes2) * \(c) / \(c))"
             }
             
             //Quelabel för multiplikation kombinerat med RandomOperator2
             
             if RandomOperator == "*" && RandomOperator2 == "*" {
+               
                 
-                
+                QlueLabel.text = "(\(XmultY)) * \(newC) + \(XmultYxModuloC))"
             }
             
             if RandomOperator == "*" && RandomOperator2 == "-" {
                 
+                if x < 10 {
                 
+                QlueLabel.text = "(\(newX) + \(ModuloX)) * (\(String(repeating: "\(y)+", count: x-1)) - ((\(newY) + \(ModuloY)))"
+                }
             }
             
             if RandomOperator == "*" && RandomOperator2 == "+" {
                 
-                
+                if x < 10 {
+                QlueLabel.text = "(\(newX) + \(ModuloX)) * (\(String(repeating: "\(y)+", count: x-1)) + ((\(newY) + \(ModuloY)))"
+                }
+                else
+                {
+                 QlueLabel.text = "(\(newX) * \(newY)) + (\(ModuloX) * ((\(newY) + \(ModuloY)))"
+                }
             }
             
             if RandomOperator == "*" && RandomOperator2 == "/" {
                 
+                if x < 10 {
+                QlueLabel.text = "(\(newX) + \(ModuloX)) * (\(String(repeating: "\(y)+", count: x-1)) / (\(c)))"
+                }
+                else
+                {
+                 QlueLabel.text = "(\(newX) * \(newY)) + (\(ModuloX) * \(ModuloY)) / (\(c)))"
+                }
                 
             }
             
@@ -448,22 +496,23 @@ class ViewController: UIViewController {
             
             if RandomOperator == "/" && RandomOperator2 == "/" {
                 
-                
+                RandomOperator2 = "+"
             }
             
             if RandomOperator == "/" && RandomOperator2 == "-" {
                 
-                
+                QlueLabel.text = "(\(divRes) * \(y) / (\(y)) - (\(newC) + \(ModuloC))"
             }
             
             if RandomOperator == "/" && RandomOperator2 == "+" {
                 
+                QlueLabel.text = "(\(divRes) * \(y) / (\(y)) + \(newC) + \(ModuloC))"
                 
             }
             
             if RandomOperator == "/" && RandomOperator2 == "*" {
                 
-                
+                QlueLabel.text = "(\(divRes) * \(y) / (\(y)) * \(c)"
             }
             
         }
@@ -549,7 +598,7 @@ class ViewController: UIViewController {
             Poäng = 0
             Försök = 3
             FörsökRäknare.text = String(3)
-            RättEllerFelMSG.text = ""
+          //  RättEllerFelMSG.text = ""
             PoängRäknare.text = String(0)
             FörsökRäknare.text = String(3)
             Levelnivå = 1
@@ -565,8 +614,8 @@ class ViewController: UIViewController {
         if RättSvar == Int(SvarInput.text!) || RättaKnapp.titleLabel?.text == "Start" {
             
             if RättSvar == Int(SvarInput.text!){
-            RättEllerFelMSG.text = "RÄTT"
-            RättEllerFelMSG.textColor = UIColor.green
+        //    RättEllerFelMSG.text = "RÄTT"
+     //       RättEllerFelMSG.textColor = UIColor.green
             Poäng += 1
             LevelPoäng += 1
             QlueLabel.isHidden = true
@@ -593,8 +642,8 @@ class ViewController: UIViewController {
             
         } else {
             
-            RättEllerFelMSG.text = "FEL"
-            RättEllerFelMSG.textColor = UIColor.red
+       //     RättEllerFelMSG.text = "FEL"
+     //       RättEllerFelMSG.textColor = UIColor.red
             SvarInput.text = ""
             Försök = Försök - 1
             
@@ -666,7 +715,7 @@ class ViewController: UIViewController {
 
     func gameover() {
         
-        RättEllerFelMSG.text = "GAME OVER"
+        //RättEllerFelMSG.text = "GAME OVER"
         RättaKnapp.setTitle("Start", for: .normal)
         Tal.text = ""
         SvarInput.isUserInteractionEnabled = false

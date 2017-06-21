@@ -15,6 +15,7 @@
 		A500B4191E8D556B0025EBC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A500B4171E8D556B0025EBC9 /* LaunchScreen.storyboard */; };
 		A500B4241E8D556B0025EBC9 /* MatteLekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500B4231E8D556B0025EBC9 /* MatteLekTests.swift */; };
 		A500B42F1E8D556B0025EBC9 /* MatteLekUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500B42E1E8D556B0025EBC9 /* MatteLekUITests.swift */; };
+		A50E2B271EF9FF1600E0DE85 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50E2B261EF9FF1600E0DE85 /* InfoViewController.swift */; };
 		A51E66D01EE42CBF006B74D7 /* ScoreboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E66CF1EE42CBF006B74D7 /* ScoreboardTableViewController.swift */; };
 		A51E66D61EE4597D006B74D7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E66D51EE4597D006B74D7 /* User.swift */; };
 		A51E66D81EE4743E006B74D7 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E66D71EE4743E006B74D7 /* UserTableViewCell.swift */; };
@@ -62,6 +63,7 @@
 		A500B42A1E8D556B0025EBC9 /* MatteLekUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatteLekUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A500B42E1E8D556B0025EBC9 /* MatteLekUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatteLekUITests.swift; sourceTree = "<group>"; };
 		A500B4301E8D556B0025EBC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A50E2B261EF9FF1600E0DE85 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		A51E66CF1EE42CBF006B74D7 /* ScoreboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardTableViewController.swift; sourceTree = "<group>"; };
 		A51E66D51EE4597D006B74D7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A51E66D71EE4743E006B74D7 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				A500B4121E8D556B0025EBC9 /* Main.storyboard */,
 				A51E66D71EE4743E006B74D7 /* UserTableViewCell.swift */,
 				A55EA1621EA803D00003C76A /* ScoreboardView.swift */,
+				A50E2B261EF9FF1600E0DE85 /* InfoViewController.swift */,
 				A500B4151E8D556B0025EBC9 /* Assets.xcassets */,
 				A5F869461EEDFF9D002FB014 /* music */,
 				A500B4171E8D556B0025EBC9 /* LaunchScreen.storyboard */,
@@ -426,6 +429,7 @@
 				A55EA1631EA803D00003C76A /* ScoreboardView.swift in Sources */,
 				A58805121EA15CE200533BB5 /* SettingsLauncher.swift in Sources */,
 				A55EA1511EA167900003C76A /* SettingCell.swift in Sources */,
+				A50E2B271EF9FF1600E0DE85 /* InfoViewController.swift in Sources */,
 				A51E66D61EE4597D006B74D7 /* User.swift in Sources */,
 				A55EA15A1EA29EFD0003C76A /* BounceButton.swift in Sources */,
 				A500B40F1E8D556B0025EBC9 /* AppDelegate.swift in Sources */,

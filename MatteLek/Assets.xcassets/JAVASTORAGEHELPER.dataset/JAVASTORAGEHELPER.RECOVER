@@ -1,0 +1,61 @@
+
+public final class TaskStorageHelper {
+    private static final TaskStorageHelper INSTANCE = new TaskStorageHelper();
+    private List<Task> tasks = new ArrayList<>();
+
+    private TaskStorageHelper() {
+
+    }
+
+    public void initStorage(Context context) {
+
+
+    }
+
+    public static TaskStorageHelper getInstance() {
+        return INSTANCE;
+    }
+
+    public void saveTask(Task task) {
+        long nextId = 0;
+        for (Task existingTask : tasks) {
+            nextId = existingTask.getId() > nextId ? existingTask.getId() : nextId;
+            if (existingTask.getId() == task.getId()) {
+                existingTask.setTitle(task.getTitle());
+                existingTask.setDescription(task.getDescription());
+                existingTask.setCompleted(task.isCompleted());
+                existingTask.setCreatedDate(task.getCreatedDate());
+                existingTask.setArchived(task.isArchived());
+                if (existingTask.getCompletedDate() != null){
+                    existingTask.setCompletedDate(task.getCompletedDate());
+                }
+                return;
+            }
+        }
+        nextId++;
+        task.setId(nextId);
+        tasks.add(task);
+    }
+
+
+    public void deleteTask(Task task) { for (Task existingTask : tasks) {
+        if (existingTask.getId() == task.getId()) { existingTask.setArchived(task.isArchived());
+        } }
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void saveTask(View view)
+
+    {
+
+        String name = tasks.toString();
+
+
+
+
+
+    }
+}

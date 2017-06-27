@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 import FBSDKCoreKit
 import FBSDKLoginKit
 
@@ -17,9 +18,17 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var Username: UITextField!
     @IBOutlet weak var Password: UITextField!
 
+    @IBOutlet weak var PasswordRepeat: UITextField!
+    @IBOutlet weak var signInVertical: NSLayoutConstraint!
+    @IBOutlet weak var HEIGHTPIC: NSLayoutConstraint!
+    
+
+    
     @IBOutlet weak var LoginOrRegister: UISegmentedControl!
     
     @IBOutlet weak var SignInButton: BounceButton!
+    
+  
     
     var isSignIn:Bool = true
     var int = Int()
@@ -34,7 +43,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        PasswordRepeat.alpha = 0
+        PasswordRepeat.isUserInteractionEnabled = false
         
         ErrorLabel.text = ""
        
@@ -107,6 +117,9 @@ class LoginViewController: UIViewController {
         
     
     }*/
+
+    
+    @IBOutlet weak var inloggbild: NSLayoutConstraint!
     
     func HandleRegister() {
         
@@ -128,6 +141,15 @@ class LoginViewController: UIViewController {
                 return
             }
            
+            user?.sendEmailVerification(completion: { (error:Error?) in
+                if error == nil {
+                    print(error)
+                } else {
+                    
+                    print(error)
+                }
+            })
+            
             let ref = FIRDatabase.database().reference(fromURL: "https://mathhack-7451e.firebaseio.com/")
        
             let usersReference = ref.child("users").child(uid)
@@ -147,10 +169,7 @@ class LoginViewController: UIViewController {
                 
                 
             })
-            
-            
-    }
-        
+        }
     
     }
     
@@ -158,42 +177,87 @@ class LoginViewController: UIViewController {
         
         guard let email = Username.text, let password = Password.text else {
             print("Form is not valid")
-          
          
             return
         }
+        
+    
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             
+            if (FIRAuth.auth()?.currentUser?.isEmailVerified)!{
+               
             
             let credentials = FIREmailPasswordAuthProvider.credential(withEmail: email, password: password)
             
             if error != nil {
-                print(error)
+                
                self.ErrorLabel.text = "Password/Username is invalid"
                 return
             }
             
            self.performSegue(withIdentifier: "LoginSuccess", sender: Any?.self)
             print("logged in")
+            }
+            else
+            {
+                self.ErrorLabel.text = "You need to verify your account"
+            }
         })
-        
     }
-    
- 
-
+  
     @IBAction func SegmentedOptionChanged(_ sender: AnyObject) {
         
         isSignIn = !isSignIn
         
         if isSignIn == false{
             
+             PasswordRepeat.isUserInteractionEnabled = true
             SignInButton.setTitle("Register", for: .normal)
+           
+            
+            self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.5, animations: {
+                
+           
+                self.PasswordRepeat.alpha = 1
+                self.HEIGHTPIC.constant = 100
+            
+                self.view.layoutIfNeeded()
+                })
+        
+                self.view.layoutIfNeeded()
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.signInVertical.constant = 80
+                    self.view.layoutIfNeeded()
+                })
+                
+          
+            
         } else if isSignIn == true {
             
+             PasswordRepeat.isUserInteractionEnabled = false
             SignInButton.setTitle("Sign In", for: .normal)
+       
+                
+            self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.5, animations: {
+                
+                self.PasswordRepeat.alpha = 0
+                self.HEIGHTPIC.constant = 0
+                
+                self.view.layoutIfNeeded()
+            })
+            
+            self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.5, animations: {
+                self.signInVertical.constant = 8
+                self.view.layoutIfNeeded()
+            })
+            
         }
         
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -249,14 +313,20 @@ class LoginViewController: UIViewController {
        
     if SignInButton.titleLabel?.text == "Register"{
         
+        if PasswordRepeat.text == Password.text{
         HandleRegister()
         
+        isSignIn = false
+       
+        } else {
+            
+       ErrorLabel.text =  "Passwords do not match"
+            
+        }
         
     } else if SignInButton.titleLabel?.text == "Sign In"{
         
-    HandleLogin()
-        
-        
+            HandleLogin()
         }
     }
     
@@ -271,5 +341,7 @@ class LoginViewController: UIViewController {
         }
         
     }
+    
+
     
 }

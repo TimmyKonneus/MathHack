@@ -111,6 +111,8 @@ class ViewController: UIViewController {
     var refHandle: UInt!
     
     var audioPlayer = AVAudioPlayer()
+    var audioPlayer2 = AVAudioPlayer()
+    var audioPlayer3 = AVAudioPlayer()
     
 
     
@@ -124,6 +126,22 @@ class ViewController: UIViewController {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Sample.mp3", ofType: "mp3")!))
             audioPlayer.prepareToPlay()
+        }
+        catch{
+            print(error)
+        }
+        
+        do {
+            audioPlayer2 = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "beep", ofType: "mp3")!))
+            audioPlayer2.prepareToPlay()
+        }
+        catch{
+            print(error)
+        }
+        
+        do {
+            audioPlayer3 = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "alert", ofType: "mp3")!))
+            audioPlayer3.prepareToPlay()
         }
         catch{
             print(error)
@@ -532,46 +550,7 @@ class ViewController: UIViewController {
     if let result = expression.expressionValue(with: nil, context: nil) as? NSNumber {
                 
     Tal.text = "\(x) \(RandomOperator) \(y) \(RandomOperator2) \(c)"
-        
-       /* if RandomOperator2 == "/" {
-             let operatorArray = ["*", "-", "+","+"]
-             let RandomOperator = operatorArray[randomIndex]
-            
-        }
-        
-        if RandomOperator == "/" {
-            let operatorArray = ["*", "-", "+","+"]
-            let RandomOperator2 = operatorArray[randomIndex]
-            
-        }*/
-        
-      /* if RandomOperator == "/" || RandomOperator2 == "/" {
-            
-          y = Int(arc4random_uniform(9) + 1)
-            
-          c = Int(arc4random_uniform(9) + 1)
-            
-          //  if RandomOperator == "/" {
-            
-            }
-            
-            if x > y {
-                
-                x -= x%y
-                
-            }*/
-            
-         /*   if RandomOperator2 == "/" {
-                
-                
-            }
-            
-            if y > c {
-            
-                y -= y%c
-                
-            }
-        }*/
+
         
     RättSvar = Int(result)
         
@@ -614,11 +593,15 @@ class ViewController: UIViewController {
         if RättSvar == Int(SvarInput.text!) || RättaKnapp.titleLabel?.text == "Start" {
             
             if RättSvar == Int(SvarInput.text!){
-        //    RättEllerFelMSG.text = "RÄTT"
-     //       RättEllerFelMSG.textColor = UIColor.green
             Poäng += 1
             LevelPoäng += 1
             QlueLabel.isHidden = true
+            
+            if sound == true{
+                    //audioPlayer2.currentTime = 0
+                    audioPlayer2.play()
+                }
+            
                 
                     self.pointslabel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
                     UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 10, options: .allowUserInteraction, animations: {
@@ -646,7 +629,10 @@ class ViewController: UIViewController {
      //       RättEllerFelMSG.textColor = UIColor.red
             SvarInput.text = ""
             Försök = Försök - 1
-            
+            if sound == true {
+                audioPlayer3.currentTime = 0
+                audioPlayer3.play()
+            }
             refreshFörsök()
           
             livkvar()

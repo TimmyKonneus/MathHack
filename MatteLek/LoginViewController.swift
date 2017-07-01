@@ -17,19 +17,20 @@ import FBSDKLoginKit
 class LoginViewController: UIViewController {
     @IBOutlet weak var Username: UITextField!
     @IBOutlet weak var Password: UITextField!
-
+    
+    @IBOutlet weak var ResetButtonOutlet: UIButton!
+   
     @IBOutlet weak var PasswordRepeat: UITextField!
     @IBOutlet weak var signInVertical: NSLayoutConstraint!
     @IBOutlet weak var HEIGHTPIC: NSLayoutConstraint!
     
-
     
     @IBOutlet weak var LoginOrRegister: UISegmentedControl!
     
     @IBOutlet weak var SignInButton: BounceButton!
     
   
-    
+    var ResetPressed:Bool = false
     var isSignIn:Bool = true
     var int = Int()
     var GlobalUID = String()
@@ -43,84 +44,24 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
+        
         PasswordRepeat.alpha = 0
         PasswordRepeat.isUserInteractionEnabled = false
-        
+   
         ErrorLabel.text = ""
-       
-      /*  let loginButton = FBSDKLoginButton()
-        view.addSubview(loginButton)
-        loginButton.frame = CGRect(x: 16, y: 50, width: view.frame.width - 32, height: 50)
-        loginButton.delegate = self
-        loginButton.readPermissions = ["email", "public_profile"]
-*/
         
         LoginOrRegister.alpha = 0
         SignInButton.alpha = 0
         Username.alpha = 0
         Password.alpha = 0
+        ResetButtonOutlet.alpha = 0
+    
+    
     }
-    
-  /*  func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        print("did log out from fb")
-    }
-  
 
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        if error != nil {
-            print(error)
-            return
-            
-        }
-        
-        showEmailwithFb()
-        
-        
-        print("login in fb!")
-        self.performSegue(withIdentifier: "LoginSuccess", sender: Any?.self)
-        print("logged in")
-        
-    }
-    
-    func showEmailwithFb(){
-        
-        let accessToken = FBSDKAccessToken.current()
-        
-        //guard let accessTokenString = accessToken?.tokenString else { return }
-        
-        let credentials = FIRFacebookAuthProvider.credential(withAccessToken: (accessToken?.tokenString)!)
-        
-        FIRAuth.auth()?.signIn(with: credentials, completion: { (user, error) in
-
-            
-            
-            if error != nil {
-               
-                print(error)
-                return
-            }
-            
-            print("Succesfully logged in with user:", user)
-            FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (connection, result, err) in
-                if err != nil {
-                    
-                    
-                    print("failed to start graph")
-                    return
-                }
-                
-                
-                print(result)
-            }
-         
-        })
-        
-    
-    }*/
-
-    
     @IBOutlet weak var inloggbild: NSLayoutConstraint!
-    
+
     func HandleRegister() {
         
         guard let email = Username.text, let password = Password.text else {
@@ -142,10 +83,10 @@ class LoginViewController: UIViewController {
             }
            
             user?.sendEmailVerification(completion: { (error:Error?) in
-                if error == nil {
-                    print(error)
+                if error != nil {
+          
                 } else {
-                    
+                 self.ErrorLabel.text = "Verification sent to email"
                     print(error)
                 }
             })
@@ -173,27 +114,36 @@ class LoginViewController: UIViewController {
     
     }
     
+ 
     func HandleLogin() {
         
+            
+        
+      
         guard let email = Username.text, let password = Password.text else {
             print("Form is not valid")
          
             return
         }
         
-    
+        
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             
-            if (FIRAuth.auth()?.currentUser?.isEmailVerified)!{
+            if error != nil {
+                
+                self.ErrorLabel.text = "Password/Username is invalid"
+                return
+            }
+        if (FIRAuth.auth()?.currentUser?.isEmailVerified)!{
                
             
             let credentials = FIREmailPasswordAuthProvider.credential(withEmail: email, password: password)
             
-            if error != nil {
-                
-               self.ErrorLabel.text = "Password/Username is invalid"
-                return
-            }
+            UserDefaults.standard.set(self.Username.text, forKey: "Username")
+            UserDefaults.standard.set(self.Password.text, forKey: "Password")
+            
+            UserDefaults.standard.set(true, forKey: "isLoggedIn")
+            UserDefaults.standard.synchronize()
             
            self.performSegue(withIdentifier: "LoginSuccess", sender: Any?.self)
             print("logged in")
@@ -201,6 +151,7 @@ class LoginViewController: UIViewController {
             else
             {
                 self.ErrorLabel.text = "You need to verify your account"
+                return
             }
         })
     }
@@ -208,7 +159,7 @@ class LoginViewController: UIViewController {
     @IBAction func SegmentedOptionChanged(_ sender: AnyObject) {
         
         isSignIn = !isSignIn
-        
+      
         if isSignIn == false{
             
              PasswordRepeat.isUserInteractionEnabled = true
@@ -261,6 +212,12 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        if let alreadySignedIn = FIRAuth.auth()?.currentUser {
+            self.performSegue(withIdentifier: "LoginSuccess", sender: Any?.self)
+        } else {
+            // sign in
+        }
+        
         self.navigationController?.isNavigationBarHidden = true
         
         UIView.animate(withDuration: 1, animations: {
@@ -291,6 +248,8 @@ class LoginViewController: UIViewController {
         UIView.animate(withDuration: 1, animations: {
             self.Password.alpha = 1
             self.Username.alpha = 1
+            self.ResetButtonOutlet.alpha = 1
+            
             
             
         }) {(true) in
@@ -342,6 +301,5 @@ class LoginViewController: UIViewController {
         
     }
     
-
     
 }

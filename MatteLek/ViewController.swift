@@ -30,10 +30,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var QlueLabel: UILabel!
     @IBOutlet weak var QlueButton: UIButton!
     
+    @IBOutlet weak var NSTIMER: UILabel!
     @IBOutlet weak var liv3: UIImageView!
     @IBOutlet weak var liv2: UIImageView!
     @IBOutlet weak var liv1: UIImageView!
     @IBOutlet weak var pointslabel: UIImageView!
+    
+    var Standard = Bool()
+    var Easy = Bool()
+    var Medium = Bool()
+    var Hard = Bool()
+    var sound = Bool()
+    
+    var Div = Bool()
+    var Mul = Bool()
+    var Add = Bool()
+    var Sub = Bool()
     
     @IBAction func INFOVIEW(_ sender: AnyObject) {
         
@@ -47,7 +59,7 @@ class ViewController: UIViewController {
     
     var HardX = Int(arc4random_uniform(UInt32(200)) + 1)
     var HardY = Int(arc4random_uniform(UInt32(200)) + 1)
-    
+ 
     
     
     @IBAction func Numbers(_ sender: UIButton) {
@@ -106,7 +118,6 @@ class ViewController: UIViewController {
     var LevelPoäng = Int()
     var Qlue = String()
     
-    
     var ref: FIRDatabaseReference!
     var refHandle: UInt!
     
@@ -114,14 +125,17 @@ class ViewController: UIViewController {
     var audioPlayer2 = AVAudioPlayer()
     var audioPlayer3 = AVAudioPlayer()
     
-
+    
     
     @IBOutlet weak var RättEllerFelMSG: UILabel!
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Levelnivå = 5
+    restoreSwitchStates()
+        
+   
+       // Levelnivå = 5
         
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Sample.mp3", ofType: "mp3")!))
@@ -177,17 +191,20 @@ class ViewController: UIViewController {
             
             
         }
-        print(Bool(sound))
+      
     }
     
-    func checkIfUserIsLoggedIn() {
+    func checkIfUserIsLoggedIn() -> Bool {
      
+        
+        
         if FIRAuth.auth()?.currentUser?.uid == nil {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
             
         } else{
             let uid = FIRAuth.auth()?.currentUser?.uid
             
+           
       FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String : AnyObject] {
@@ -198,6 +215,8 @@ class ViewController: UIViewController {
                 
             })
         }
+        
+         return UserDefaults.standard.bool(forKey: "isLoggedIn")
     }
     
     func handleLogout(){
@@ -210,12 +229,19 @@ class ViewController: UIViewController {
     
          self.navigationController?.isNavigationBarHidden = true
        performSegue(withIdentifier: "BackToLogin", sender: navigationItem.leftBarButtonItem)
+        
+        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        UserDefaults.standard.synchronize()
     }
     
     func SkapaTal() {
         
     PoängRäknare.text = String(Poäng)
     FörsökRäknare.text = String(Försök)
+        print(Add)
+        print(Sub)
+        print(Mul)
+        print(Div)
         
     SvarInput.text = ""
      
@@ -224,6 +250,7 @@ class ViewController: UIViewController {
         var c = Int(arc4random_uniform(11) + 1)
         
         var x = Int(arc4random_uniform(11) + 1) + y
+    
         
         var z = 9
         var b = 100
@@ -231,35 +258,53 @@ class ViewController: UIViewController {
         
        // var q = Int(y - x)
         
-    if Levelnivå > 1 {
+    if Levelnivå >= 1 {
         
         x = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 10) + y
         y = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 2)
         c = Int(arc4random_uniform(UInt32(20)) + 1)
         
-        
+        if Easy == false {
+         
+            
+        }
         
         }
     
     var operatorArray = ["+", "+", "-", "-"]
-    let operatorArray2 = ["*", "+", "-","-"]
+    var operatorArray2 = ["*", "+", "-","-"]
+    
+  
     
     let randomIndex = Int(arc4random_uniform(UInt32(operatorArray.count)))
     let randomIndex2 = Int(arc4random_uniform(UInt32(operatorArray2.count)))
         
     var RandomOperator = operatorArray[randomIndex]
     var RandomOperator2 = operatorArray[randomIndex2]
+    
+        if Add == true && Sub == false {
+            
+             RandomOperator = "+"
+             RandomOperator2 = "+"
+        }
+        
+        if Add == false && Sub == true {
+            
+             RandomOperator = "-"
+             RandomOperator2 = "-"
+        }
         
         let modulo = x % y
         let modulo2 = y % c
        
-        if x < 11 && y < 11 {
+        if x < 11 && y < 11 && Mul == true {
             
         RandomOperator = "*"
             
         }
         
-    if Int(modulo) == 0 {
+        
+    if Int(modulo) == 0 && Div == true {
     
         RandomOperator = "/"
  
@@ -273,7 +318,7 @@ class ViewController: UIViewController {
      }
         
 
-    if RandomOperator == "*" || RandomOperator2 == "*"{ //&& Levelnivå > 2 {
+    if RandomOperator == "*" || RandomOperator2 == "*" { //&& Levelnivå > 2 {
         
         
         if RandomOperator == "*" {
@@ -569,10 +614,81 @@ class ViewController: UIViewController {
         SkapaTal()
     }
     
+    var counter7 = 60
+    var timer = Timer()
+    
+
+    
+    func timerAction() {
+        counter7 -= 1
+        NSTIMER.text = "\(counter7)"
+        
+        let counterDiv2 = counter7 / 2
+        
+    if NSTIMER.text == "\(0)" {
+            gameover()
+        }
+        
+        if counterDiv2%2 == 1 {
+            
+            NSTIMER.textColor = UIColor.black
+        }
+        
+        if counterDiv2%2 == 0 {
+            
+            NSTIMER.textColor = UIColor.red
+        }
+        
+        if counter7 == 10 {
+            
+            NSTIMER.textColor = UIColor.blue
+        }
+        if counter7 == 9 {
+            
+            NSTIMER.textColor = UIColor.brown
+        }
+        if counter7 == 8 {
+            
+            NSTIMER.textColor = UIColor.green
+        }
+        if counter7 == 7 {
+            
+            NSTIMER.textColor = UIColor.purple
+        }
+        if counter7 == 6 {
+            
+            NSTIMER.textColor = UIColor.brown
+        }
+        if counter7 == 5 {
+            
+            NSTIMER.textColor = UIColor.yellow
+        }
+        if counter7 == 4 {
+            
+            NSTIMER.textColor = UIColor.white
+        }
+        if counter7 == 3 {
+            
+            NSTIMER.textColor = UIColor.darkGray
+        }
+        if counter7 == 2 {
+            
+            NSTIMER.textColor = UIColor.red
+        }
+        if counter7 == 1 {
+            
+            NSTIMER.textColor = UIColor.orange
+        }
+        
+    }
+   
 
     @IBAction func RättaKnapp_press(_ sender: AnyObject) {
-        
+
         if RättaKnapp.titleLabel?.text == "Start"{
+            timer.invalidate()
+            timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+            
             RättaKnapp.isUserInteractionEnabled = true
             Poäng = 0
             Försök = 3
@@ -583,6 +699,8 @@ class ViewController: UIViewController {
             Levelnivå = 1
             liv1.isHidden = false
             liv2.isHidden = false
+            
+
             
         }
         
@@ -596,6 +714,7 @@ class ViewController: UIViewController {
             Poäng += 1
             LevelPoäng += 1
             QlueLabel.isHidden = true
+            counter7 = 60
             
             if sound == true{
                     //audioPlayer2.currentTime = 0
@@ -706,6 +825,9 @@ class ViewController: UIViewController {
         Tal.text = ""
         SvarInput.isUserInteractionEnabled = false
         
+        timer.invalidate()
+        counter7 = 60
+        
         liv1.isHidden = false
         liv2.isHidden = false
         liv3.isHidden = false
@@ -753,9 +875,10 @@ class ViewController: UIViewController {
     
     @IBAction func SettingsPressed(_ sender: AnyObject) {
         
+        if RättaKnapp.titleLabel?.text != "Check"{
          HandleMore()
     }
-    
+    }
     lazy var settingsLauncher: SettingsLauncher = {
         
         let launcher = SettingsLauncher()
@@ -782,9 +905,9 @@ class ViewController: UIViewController {
             QlueLabel.isHidden = true
         }
     }
-      var globalHS = Int()
-        var globalHSNEG = Int()
-        var sound = Bool(true)
+    
+    var globalHS = Int()
+    var globalHSNEG = Int()
     
     var OnOff = String()
     
@@ -846,5 +969,40 @@ class ViewController: UIViewController {
         }
     
 }
+    
+    func saveSwitchStates() {
+        
+        UserDefaults.standard.set(Easy, forKey: "EasyOnOff")
+        UserDefaults.standard.set(Standard, forKey: "StandardOnOff")
+        UserDefaults.standard.set(Medium, forKey: "MediumOnOff")
+        UserDefaults.standard.set(Hard, forKey: "HardOnOff")
+        
+        UserDefaults.standard.set(Add, forKey: "AddOnOff")
+        UserDefaults.standard.set(Sub, forKey: "SubOnOff")
+        UserDefaults.standard.set(Mul, forKey: "MulOnOff")
+        UserDefaults.standard.set(Div, forKey: "DivOnOff")
+        
+        UserDefaults.standard.set(sound, forKey: "SoundOnOff")
+        
+        UserDefaults.standard.synchronize()
+        
+    }
+    
+    func restoreSwitchStates() {
+        
+        Easy = UserDefaults.standard.bool(forKey: "EasyOnOff")
+        Standard = UserDefaults.standard.bool(forKey: "StandardOnOff")
+        Medium = UserDefaults.standard.bool(forKey: "MediumOnOff")
+        Hard = UserDefaults.standard.bool(forKey: "HardOnOff")
+        
+        Add = UserDefaults.standard.bool(forKey: "AddOnOff")
+        Sub = UserDefaults.standard.bool(forKey: "SubOnOff")
+        Mul = UserDefaults.standard.bool(forKey: "MulOnOff")
+        Div = UserDefaults.standard.bool(forKey: "DivOnOff")
+        
+        sound = UserDefaults.standard.bool(forKey: "SoundOnOff")
+        
+        UserDefaults.standard.synchronize()
+    }
 }
 

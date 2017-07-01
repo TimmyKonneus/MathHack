@@ -28,6 +28,7 @@
 		A55EA1631EA803D00003C76A /* ScoreboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EA1621EA803D00003C76A /* ScoreboardView.swift */; };
 		A58805121EA15CE200533BB5 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58805111EA15CE200533BB5 /* SettingsLauncher.swift */; };
 		A5F869481EEDFFC7002FB014 /* Sample.mp3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A5F869471EEDFFC7002FB014 /* Sample.mp3.mp3 */; };
+		A5FA7BA21F028A9B00B181F2 /* PasswordResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FA7BA11F028A9B00B181F2 /* PasswordResetVC.swift */; };
 		A5FBAAFE1EFC686C00166A13 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A5FBAAFD1EFC686C00166A13 /* beep.mp3 */; };
 		A5FBAB001EFC78E900166A13 /* alert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A5FBAAFF1EFC78E900166A13 /* alert.mp3 */; };
 /* End PBXBuildFile section */
@@ -79,6 +80,7 @@
 		A55EA1621EA803D00003C76A /* ScoreboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardView.swift; sourceTree = "<group>"; };
 		A58805111EA15CE200533BB5 /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		A5F869471EEDFFC7002FB014 /* Sample.mp3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sample.mp3.mp3; sourceTree = "<group>"; };
+		A5FA7BA11F028A9B00B181F2 /* PasswordResetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordResetVC.swift; path = ../PasswordResetVC.swift; sourceTree = "<group>"; };
 		A5FBAAFD1EFC686C00166A13 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		A5FBAAFF1EFC78E900166A13 /* alert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alert.mp3; sourceTree = "<group>"; };
 		B69DE98BE767F059613E6292 /* Pods-MatteLek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatteLek.release.xcconfig"; path = "Pods/Target Support Files/Pods-MatteLek/Pods-MatteLek.release.xcconfig"; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				A55EA1561EA197450003C76A /* ChangeDifficultyViewController.swift */,
 				A55EA1521EA18EEA0003C76A /* GameSettingsViewController.swift */,
 				A51E66CF1EE42CBF006B74D7 /* ScoreboardTableViewController.swift */,
+				A5FA7BA11F028A9B00B181F2 /* PasswordResetVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				A55EA1511EA167900003C76A /* SettingCell.swift in Sources */,
 				A50E2B271EF9FF1600E0DE85 /* InfoViewController.swift in Sources */,
 				A51E66D61EE4597D006B74D7 /* User.swift in Sources */,
+				A5FA7BA21F028A9B00B181F2 /* PasswordResetVC.swift in Sources */,
 				A55EA15A1EA29EFD0003C76A /* BounceButton.swift in Sources */,
 				A500B40F1E8D556B0025EBC9 /* AppDelegate.swift in Sources */,
 			);

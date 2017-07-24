@@ -10,8 +10,9 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 import AVFoundation
+import GoogleMobileAds
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, GADBannerViewDelegate {
     
      //var sound = Bool(true)
     
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var SvarInput: UITextField!
     
+    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var RättaKnapp: UIButton!
     
     @IBOutlet weak var PoängRäknare: UILabel!
@@ -134,7 +136,14 @@ class ViewController: UIViewController {
         
     restoreSwitchStates()
         
-   
+        
+        let request = GADRequest()
+        request.testDevices = [kGADSimulatorID]
+        bannerView.adUnitID = "ca-app-pub-1797867231153138/8123352001"
+        bannerView.rootViewController = self
+        bannerView.delegate = self
+        bannerView.load(request)
+        
        // Levelnivå = 5
         
         do {
@@ -197,14 +206,14 @@ class ViewController: UIViewController {
     func checkIfUserIsLoggedIn() -> Bool {
      
         
-        
-        if FIRAuth.auth()?.currentUser?.uid == nil {
+         if UserDefaults.standard.bool(forKey: "annon") == false{
+        if FIRAuth.auth()?.currentUser?.uid == nil   {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
             
-        } else{
+        } else {
             let uid = FIRAuth.auth()?.currentUser?.uid
             
-           
+            
       FIRDatabase.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String : AnyObject] {
@@ -215,9 +224,10 @@ class ViewController: UIViewController {
                 
             })
         }
-        
+        }
          return UserDefaults.standard.bool(forKey: "isLoggedIn")
     }
+    
     
     func handleLogout(){
         
@@ -245,11 +255,11 @@ class ViewController: UIViewController {
         
     SvarInput.text = ""
      
-        var y = Int(arc4random_uniform(11) + 2)
+        var y = Int()//Int(arc4random_uniform(11) + 2)
 
-        var c = Int(arc4random_uniform(11) + 1)
+        var c = Int()//(arc4random_uniform(11) + 1)
         
-        var x = Int(arc4random_uniform(11) + 1) + y
+        var x = Int()//(arc4random_uniform(11) + 1) +
     
         
         var z = 9
@@ -260,49 +270,280 @@ class ViewController: UIViewController {
         
     if Levelnivå >= 1 {
         
-        x = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 10) + y
-        y = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 2)
-        c = Int(arc4random_uniform(UInt32(20)) + 1)
+       
+         y = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 2)
+         c = Int(arc4random_uniform(UInt32(20)) + 1)
+         x = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 10) + y
         
-        if Easy == false {
-         
+        if UserDefaults.standard.bool(forKey: "StandardHidden") == false {
+            
+             y = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 2)
+             c = Int(arc4random_uniform(UInt32(20)) + 1)
+             x = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 10) + y
+        }
+        if UserDefaults.standard.bool(forKey: "EasyHidden") == false {
+            
+             y = Int(arc4random_uniform(UInt32(25)) + 2)
+             c = Int(arc4random_uniform(UInt32(20)) + 1)
+             x = Int(arc4random_uniform(UInt32(50)) + 1) + y
+        }
+        if UserDefaults.standard.bool(forKey: "MediumHidden") == false {
+            
+            
+             y = Levelnivå * Int(arc4random_uniform(UInt32(50)) + 15)
+             c = Int(arc4random_uniform(UInt32(20)) + 1)
+             x = Levelnivå * Int(arc4random_uniform(UInt32(100)) + 30) + y
+        }
+        if UserDefaults.standard.bool(forKey: "HardHidden") == false {
+            
+             y = Levelnivå * Int(arc4random_uniform(UInt32(125)) + 20)
+             c = Int(arc4random_uniform(UInt32(20)) + 1)
+             x = Levelnivå * Int(arc4random_uniform(UInt32(200)) + 50) + y
+        }
+        
+        if UserDefaults.standard.bool(forKey: "MulOnOff") == true && UserDefaults.standard.bool(forKey: "DivOnOff") == false && UserDefaults.standard.bool(forKey: "SubOnOff") == false && UserDefaults.standard.bool(forKey: "AddOnOff") == false {
+            
+            x = Int(arc4random_uniform(UInt32(11)) + 1)
+            y = Int(arc4random_uniform(UInt32(11)) + 1)
+            
+            if UserDefaults.standard.bool(forKey: "StandardHidden") && Levelnivå >= 3 {
+                
+                x = Int(arc4random_uniform(UInt32(15)) + 2)
+                y = Int(arc4random_uniform(UInt32(12)) + 2)
+            }
+            
+            if UserDefaults.standard.bool(forKey: "StandardHidden") && Levelnivå >= 5 {
+                
+                x = Int(arc4random_uniform(UInt32(20)) + 4)
+                y = Int(arc4random_uniform(UInt32(15)) + 2)
+            }
+            
+            
+            if UserDefaults.standard.bool(forKey: "MediumHidden") {
+                
+                x = Int(arc4random_uniform(UInt32(15)) + 2)
+                y = Int(arc4random_uniform(UInt32(12)) + 1)
+            }
+            
+            if UserDefaults.standard.bool(forKey: "HardHidden") {
+                
+                x = Int(arc4random_uniform(UInt32(20)) + 3)
+                y = Int(arc4random_uniform(UInt32(15)) + 2)
+            }
+            
+        }
+        if UserDefaults.standard.bool(forKey: "MulOnOff") == false && UserDefaults.standard.bool(forKey: "DivOnOff") == true && UserDefaults.standard.bool(forKey: "SubOnOff") == false && UserDefaults.standard.bool(forKey: "AddOnOff") == false {
+            
+            var modulo = x%y
+            x -= modulo
+        }
+        
+        if UserDefaults.standard.bool(forKey: "MulOnOff") == true && UserDefaults.standard.bool(forKey: "DivOnOff") == true && UserDefaults.standard.bool(forKey: "SubOnOff") == false && UserDefaults.standard.bool(forKey: "AddOnOff") == false {
+            
+            if Poäng % 2 == 0 {
+                if UserDefaults.standard.bool(forKey: "StandardHidden") == false {
+                    
+                    y = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 2)
+                    c = Int(arc4random_uniform(UInt32(20)) + 1)
+                    x = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 10) + y
+                }
+                if UserDefaults.standard.bool(forKey: "EasyHidden") == false {
+                    
+                    y = Int(arc4random_uniform(UInt32(20)) + 2)
+                    c = Int(arc4random_uniform(UInt32(10)) + 1)
+                    x = Int(arc4random_uniform(UInt32(20)) + 1) + y
+                }
+                if UserDefaults.standard.bool(forKey: "MediumHidden") == false {
+                    
+                    
+                    y = Levelnivå * Int(arc4random_uniform(UInt32(50)) + 15)
+                    c = Int(arc4random_uniform(UInt32(20)) + 1)
+                    x = Levelnivå * Int(arc4random_uniform(UInt32(100)) + 30) + y
+                }
+                if UserDefaults.standard.bool(forKey: "HardHidden") == false {
+                    
+                    y = Levelnivå * Int(arc4random_uniform(UInt32(125)) + 20)
+                    c = Int(arc4random_uniform(UInt32(20)) + 1)
+                    x = Levelnivå * Int(arc4random_uniform(UInt32(200)) + 50) + y
+                }
+
+                var modulo = x%y
+                var YminMod = y - modulo
+                x += YminMod
+    
+            
+        }
+            if Poäng % 2 == 1 {
+                
+                x = Int(arc4random_uniform(UInt32(11)) + 1)
+                y = Int(arc4random_uniform(UInt32(11)) + 1)
+                
+                if UserDefaults.standard.bool(forKey: "EasyHidden") == false {
+                    
+                    x = Int(arc4random_uniform(UInt32(8)) + 1)
+                    y = Int(arc4random_uniform(UInt32(7)) + 1)
+                }
+                
+                if UserDefaults.standard.bool(forKey: "StandardHidden") == false && Levelnivå >= 3 {
+                    
+                    x = Int(arc4random_uniform(UInt32(15)) + 2)
+                    y = Int(arc4random_uniform(UInt32(12)) + 2)
+                }
+                
+                if UserDefaults.standard.bool(forKey: "StandardHidden") == false && Levelnivå >= 5 {
+                    
+                    x = Int(arc4random_uniform(UInt32(20)) + 4)
+                    y = Int(arc4random_uniform(UInt32(15)) + 2)
+                }
+                
+                
+                if UserDefaults.standard.bool(forKey: "MediumHidden") == false {
+                    
+                    x = Int(arc4random_uniform(UInt32(15)) + 2)
+                    y = Int(arc4random_uniform(UInt32(12)) + 1)
+                }
+                
+                if UserDefaults.standard.bool(forKey: "HardHidden") == false {
+                    
+                    x = Int(arc4random_uniform(UInt32(20)) + 3)
+                    y = Int(arc4random_uniform(UInt32(15)) + 2)
+                }
+            }
             
         }
         
+        if Poäng % 3 == 0 && UserDefaults.standard.bool(forKey: "MulOnOff") == true {
+            
+            x = Int(arc4random_uniform(UInt32(11)) + 1)
+            y = Int(arc4random_uniform(UInt32(11)) + 1)
+            if UserDefaults.standard.bool(forKey: "EasyHidden") == false && Levelnivå >= 3 {
+                
+                x = Int(arc4random_uniform(UInt32(8)) + 1)
+                y = Int(arc4random_uniform(UInt32(7)) + 1)
+            }
+            
+            if UserDefaults.standard.bool(forKey: "StandardHidden") == false && Levelnivå >= 3 {
+                
+                x = Int(arc4random_uniform(UInt32(15)) + 2)
+                y = Int(arc4random_uniform(UInt32(12)) + 2)
+            }
+            
+            if UserDefaults.standard.bool(forKey: "StandardHidden") == false && Levelnivå >= 5 {
+                
+                x = Int(arc4random_uniform(UInt32(20)) + 4)
+                y = Int(arc4random_uniform(UInt32(15)) + 2)
+            }
+            
+            
+            if UserDefaults.standard.bool(forKey: "MediumHidden") == false {
+                
+                x = Int(arc4random_uniform(UInt32(15)) + 2)
+                y = Int(arc4random_uniform(UInt32(12)) + 1)
+            }
+            
+            if UserDefaults.standard.bool(forKey: "HardHidden") == false {
+                
+                x = Int(arc4random_uniform(UInt32(20)) + 3)
+                y = Int(arc4random_uniform(UInt32(15)) + 2)
+            }
         }
-    
+        
+        
+        if Poäng % 4 == 0 && UserDefaults.standard.bool(forKey: "DivOnOff") == true {
+            
+            if UserDefaults.standard.bool(forKey: "StandardHidden") == false {
+                
+                y = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 2)
+                c = Int(arc4random_uniform(UInt32(20)) + 1)
+                x = Levelnivå * Int(arc4random_uniform(UInt32(z)) + 10) + y
+            }
+            if UserDefaults.standard.bool(forKey: "EasyHidden") == false {
+                
+                y = Int(arc4random_uniform(UInt32(25)) + 2)
+                c = Int(arc4random_uniform(UInt32(10)) + 1)
+                x = Int(arc4random_uniform(UInt32(50)) + 1) + y
+            }
+            if UserDefaults.standard.bool(forKey: "MediumHidden") == false {
+                
+                
+                y = Levelnivå * Int(arc4random_uniform(UInt32(10)) + 10)
+                c = Int(arc4random_uniform(UInt32(20)) + 1)
+                x = Levelnivå * Int(arc4random_uniform(UInt32(100)) + 30) + y
+            }
+            if UserDefaults.standard.bool(forKey: "HardHidden") == false {
+                
+                y = Levelnivå * Int(arc4random_uniform(UInt32(20)) + 10)
+                c = Int(arc4random_uniform(UInt32(20)) + 1)
+                x = Levelnivå * Int(arc4random_uniform(UInt32(200)) + 50) + y
+            }
+            
+            var modulo = x%y
+            var YminMod = y - modulo
+            x += YminMod
+           
+        }
+        
+        }
+        
     var operatorArray = ["+", "+", "-", "-"]
     var operatorArray2 = ["*", "+", "-","-"]
     
-  
+        if UserDefaults.standard.bool(forKey: "SubOnOff") == true && UserDefaults.standard.bool(forKey: "AddOnOff") == false {
+            
+             operatorArray = ["-", "-", "-", "-"]
+        }
+        
+        if UserDefaults.standard.bool(forKey: "SubOnOff") == false && UserDefaults.standard.bool(forKey: "AddOnOff") == true {
+            
+           operatorArray = ["+", "+", "+", "+"]
+            
+        }
     
     let randomIndex = Int(arc4random_uniform(UInt32(operatorArray.count)))
     let randomIndex2 = Int(arc4random_uniform(UInt32(operatorArray2.count)))
         
     var RandomOperator = operatorArray[randomIndex]
     var RandomOperator2 = operatorArray[randomIndex2]
-    
-        if Add == true && Sub == false {
-            
-             RandomOperator = "+"
-             RandomOperator2 = "+"
-        }
         
-        if Add == false && Sub == true {
-            
-             RandomOperator = "-"
-             RandomOperator2 = "-"
-        }
-        
+
         let modulo = x % y
         let modulo2 = y % c
        
-        if x < 11 && y < 11 && Mul == true {
+        if x <= 11 && y <= 11 && Mul == true {
             
         RandomOperator = "*"
             
         }
         
+        if x <= 9 && y <= 8 && Mul == true && UserDefaults.standard.bool(forKey: "EasyHidden") == false{
+            
+            RandomOperator = "*"
+            
+        }
+        
+        if x <= 17 && y <= 14 && Mul == true && UserDefaults.standard.bool(forKey: "StandardHidden") == false && Levelnivå >= 3{
+            
+            RandomOperator = "*"
+            
+        }
+        
+        if x <= 24 && y <= 17 && Mul == true && UserDefaults.standard.bool(forKey: "StandardHidden") == false && Levelnivå >= 5{
+            
+            RandomOperator = "*"
+            
+        }
+        
+        if x <= 17 && y <= 13 && Mul == true && UserDefaults.standard.bool(forKey: "MediumHidden") == false{
+            
+            RandomOperator = "*"
+            
+        }
+        
+        if x <= 23 && y <= 17 && Mul == true && UserDefaults.standard.bool(forKey: "HardHidden") == false{
+            
+            RandomOperator = "*"
+            
+        }
         
     if Int(modulo) == 0 && Div == true {
     
@@ -832,6 +1073,7 @@ class ViewController: UIViewController {
         liv2.isHidden = false
         liv3.isHidden = false
         
+        if UserDefaults.standard.bool(forKey: "annon") == false {
         let uid = FIRAuth.auth()?.currentUser?.uid
         ref.child("users").child(uid!).observe(FIRDataEventType.value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
@@ -845,6 +1087,7 @@ class ViewController: UIViewController {
             self.globalHS = highscore!
             }
         })
+        
         var highscorepoints = Poäng
          if globalHS < highscorepoints || globalHS == nil {
         var ref = FIRDatabase.database().reference(fromURL: "https://mathhack-7451e.firebaseio.com/")
@@ -864,6 +1107,7 @@ class ViewController: UIViewController {
             self.globalHSNEG = -highscorepoints
         })
             
+        }
         }
         ShowScoreBoard()
     }
@@ -972,10 +1216,10 @@ class ViewController: UIViewController {
     
     func saveSwitchStates() {
         
-        UserDefaults.standard.set(Easy, forKey: "EasyOnOff")
-        UserDefaults.standard.set(Standard, forKey: "StandardOnOff")
-        UserDefaults.standard.set(Medium, forKey: "MediumOnOff")
-        UserDefaults.standard.set(Hard, forKey: "HardOnOff")
+        UserDefaults.standard.set(Easy, forKey: "EasyHidden")
+        UserDefaults.standard.set(Standard, forKey: "StandardHidden")
+        UserDefaults.standard.set(Medium, forKey: "MediumHidden")
+        UserDefaults.standard.set(Hard, forKey: "HardHidden")
         
         UserDefaults.standard.set(Add, forKey: "AddOnOff")
         UserDefaults.standard.set(Sub, forKey: "SubOnOff")
@@ -990,10 +1234,10 @@ class ViewController: UIViewController {
     
     func restoreSwitchStates() {
         
-        Easy = UserDefaults.standard.bool(forKey: "EasyOnOff")
-        Standard = UserDefaults.standard.bool(forKey: "StandardOnOff")
-        Medium = UserDefaults.standard.bool(forKey: "MediumOnOff")
-        Hard = UserDefaults.standard.bool(forKey: "HardOnOff")
+        Easy = UserDefaults.standard.bool(forKey: "EasyHidden")
+        Standard = UserDefaults.standard.bool(forKey: "StandardHidden")
+        Medium = UserDefaults.standard.bool(forKey: "MediumHidden")
+        Hard = UserDefaults.standard.bool(forKey: "HardHidden")
         
         Add = UserDefaults.standard.bool(forKey: "AddOnOff")
         Sub = UserDefaults.standard.bool(forKey: "SubOnOff")

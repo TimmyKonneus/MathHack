@@ -156,8 +156,8 @@ class GameSettingsViewController: UIViewController {
         }else{
             if (StandardImage.isHidden) == false {
              
-                 UserDefaults.standard.set(Bool(true), forKey: "EasyHidden")
-                 UserDefaults.standard.set(Bool(false), forKey: "StandardHidden")
+                UserDefaults.standard.set(Bool(true), forKey: "EasyHidden")
+                UserDefaults.standard.set(Bool(false), forKey: "StandardHidden")
                 UserDefaults.standard.set(Bool(true), forKey: "MediumHidden")
                 UserDefaults.standard.set(Bool(true), forKey: "HardHidden")
                 
@@ -180,10 +180,10 @@ class GameSettingsViewController: UIViewController {
             if (EeasyImage.isHidden) == false {
                 
                  UserDefaults.standard.set(Bool(false), forKey: "EasyHidden")
-                UserDefaults.standard.set(Bool(true), forKey: "StandardHidden")
+                 UserDefaults.standard.set(Bool(true), forKey: "StandardHidden")
                  UserDefaults.standard.set(Bool(true), forKey: "MediumHidden")
                  UserDefaults.standard.set(Bool(true), forKey: "HardHidden")
-                UserDefaults.standard.synchronize()
+                 UserDefaults.standard.synchronize()
             }
         }
     }

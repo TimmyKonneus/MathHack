@@ -11,10 +11,11 @@ import Firebase
 import FirebaseAuth
 import FBSDKCoreKit
 import FBSDKLoginKit
+import GoogleMobileAds
 
 
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, GADBannerViewDelegate {
     @IBOutlet weak var Username: UITextField!
     @IBOutlet weak var Password: UITextField!
     
@@ -24,6 +25,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var signInVertical: NSLayoutConstraint!
     @IBOutlet weak var HEIGHTPIC: NSLayoutConstraint!
     
+    @IBOutlet weak var bannerView: GADBannerView!
     
     @IBOutlet weak var LoginOrRegister: UISegmentedControl!
     
@@ -44,7 +46,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+       UserDefaults.standard.set(false, forKey: "annon")
+       UserDefaults.standard.synchronize()
+
         
         PasswordRepeat.alpha = 0
         PasswordRepeat.isUserInteractionEnabled = false
@@ -56,10 +60,23 @@ class LoginViewController: UIViewController {
         Username.alpha = 0
         Password.alpha = 0
         ResetButtonOutlet.alpha = 0
+        
+        let request = GADRequest()
+        request.testDevices = [kGADSimulatorID]
+        bannerView.adUnitID = "ca-app-pub-1797867231153138/5507962806"
+        bannerView.rootViewController = self
+        bannerView.delegate = self
+        bannerView.load(request)
     
     
     }
 
+    @IBAction func LoginInAnnon(_ sender: AnyObject) {
+        
+        UserDefaults.standard.set(true, forKey: "annon")
+        UserDefaults.standard.synchronize()
+
+    }
     @IBOutlet weak var inloggbild: NSLayoutConstraint!
 
     func HandleRegister() {
@@ -116,18 +133,14 @@ class LoginViewController: UIViewController {
     
  
     func HandleLogin() {
-        
-            
-        
-      
+
         guard let email = Username.text, let password = Password.text else {
             print("Form is not valid")
          
             return
         }
         
-        
-        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+       FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             
             if error != nil {
                 
